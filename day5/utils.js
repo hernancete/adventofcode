@@ -25,41 +25,51 @@ const intcode = (intCode, input) => {
 
         switch(opcode) {
             case 1:
+                // Sum
                 // console.log('-> Plus: inCode[', getParamIndex(i+3, paramModes.third, intCode), '] =', getParamValue(i+1, paramModes.first, intCode), '+', getParamValue(i+2, paramModes.second, intCode));
                 intCode[getParamIndex(i+3, paramModes.third, intCode)] = getParamValue(i+1, paramModes.first, intCode) + getParamValue(i+2, paramModes.second, intCode);
                 i+=3;
                 continue;
             case 2:
+                // Multiplication
                 // console.log('-> Mult: inCode[', getParamIndex(i+3, paramModes.third, intCode), '] =', getParamValue(i+1, paramModes.first, intCode), '*', getParamValue(i+2, paramModes.second, intCode));
                 intCode[getParamIndex(i+3, paramModes.third, intCode)] = getParamValue(i+1, paramModes.first, intCode) * getParamValue(i+2, paramModes.second, intCode);
                 i+=3;
                 continue;
             case 3:
+                // Input
                 console.log('-> Asking for intCode', input);
                 intCode[getParamIndex(i+1, paramModes.first, intCode)] = input;
                 i+=1;
                 continue;
             case 4:
+                // Output
                 console.log('-> Output:', getParamValue(i+1, paramModes.first, intCode));
                 i+=1;
                 continue;
             case 5:
+                // Jump if true
                 // console.log('-> jump if true', getParamValue(i+1, paramModes.first, intCode), getParamValue(i+1, paramModes.second, intCode) != 0);
+                // If true, i takes the value from the second param and I add "-1" to that value because the "for" loop adds 1 in the next iteration
                 i = getParamValue(i+1, paramModes.first, intCode) != 0 ? getParamValue(i+2, paramModes.second, intCode) - 1 : i + 2;
                 // console.log('Jumping to', i)
                 continue;
             case 6:
+                // Jump if false
                 // console.log('-> jump if false', getParamValue(i+1, paramModes.first, intCode), getParamValue(i+1, paramModes.second, intCode) != 0);
+                // If true, i takes the value from the second param and I add "-1" to that value because the "for" loop adds 1 in the next iteration
                 i = getParamValue(i+1, paramModes.first, intCode) == 0 ? getParamValue(i+2, paramModes.second, intCode) - 1 : i + 2;
                 // console.log('Jumping to', i)
                 continue;
             case 7:
+                // Less than
                 // console.log('-> less than', getParamValue(i+1, paramModes.first, intCode), getParamValue(i+2, paramModes.second, intCode), getParamValue(i+1, paramModes.first, intCode) < getParamValue(i+2, paramModes.second, intCode));
                 intCode[getParamIndex(i+3, paramModes.third, intCode)] = getParamValue(i+1, paramModes.first, intCode) < getParamValue(i+2, paramModes.second, intCode) ? 1 : 0;
                 // console.log('intCode[', getParamIndex(i+3, paramModes.third, intCode), '] = ', intCode[getParamIndex(i+3, paramModes.third, intCode)])
                 i+=3;
                 continue;
             case 8:
+                // Equals to
                 // console.log('-> equals to', getParamValue(i+1, paramModes.first, intCode), getParamValue(i+2, paramModes.second, intCode), getParamValue(i+1, paramModes.first, intCode) == getParamValue(i+2, paramModes.second, intCode));
                 intCode[getParamIndex(i+3, paramModes.third, intCode)] = getParamValue(i+1, paramModes.first, intCode) == getParamValue(i+2, paramModes.second, intCode) ? 1 : 0;
                 // console.log('intCode[', getParamIndex(i+3, paramModes.third, intCode), '] = ', intCode[getParamIndex(i+3, paramModes.third, intCode)])
