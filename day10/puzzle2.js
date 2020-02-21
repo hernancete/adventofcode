@@ -63,11 +63,11 @@ let Rta;
 
 const mapWidth = input[0].length;
 const asteroidsMapString = input.join('');
-console.log(mapWidth);
+// console.log(mapWidth);
 
 let am = new AsteroidsMap(asteroidsMapString, mapWidth);
 am.draw();
-// console.log('Total asteroids', am.asteroids.length);
+console.log('Total asteroids', am.asteroids.length);
 
 let ast = am.vaporizeFrom(27, 19);
 
