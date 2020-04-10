@@ -4,6 +4,9 @@ const WHITE = 1;
 const TURNLEFT = 0;
 const TURNRIGHT = 1;
 
+const BLACK_PAINT = ' '
+const WHITE_PAINT = '@'
+
 class Panel {
 
     constructor(x, y, color=BLACK) {
@@ -50,6 +53,18 @@ class Wall {
         this._right = Math.max(this._right, x);
     }
 
+    draw() {
+        let drawing = [];
+        for(let y=this._top; y<=this._bottom; y++) {
+            let row = [];
+            for(let x=this._left; x<=this._right; x++) {
+                row.push(this.getPanelColor(x, y) == BLACK? BLACK_PAINT : WHITE_PAINT);
+            }
+            console.log(row.join(''));
+            drawing.push(row);
+        }
+        return drawing;
+    }
 };
 
 class Direction {
