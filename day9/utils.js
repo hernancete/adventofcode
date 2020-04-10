@@ -60,7 +60,7 @@ const intcodeAsync = async (name, intCode, inQueue=null, outQueue=null) => {
             case 4:
                 // Output
                 let output = getParamValue(i+1, paramModes.first, intCode, baseOffset);
-                console.log(name, '-> Output:', output);
+                // console.log(name, '-> Output:', output);
                 outQueue.put(output);
                 i+=1;
                 continue;
@@ -100,7 +100,7 @@ const intcodeAsync = async (name, intCode, inQueue=null, outQueue=null) => {
                 i+=1;
                 continue;
             case 99:
-                console.log('Gracefully halting');
+                console.log(name, '-> Gracefully halting');
                 return;
             default:
                 console.error('Unknown Opcode', opcode);
