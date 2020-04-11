@@ -134,6 +134,15 @@ class Queue extends EventEmitter {
         });
     }
 
+    getOrDie() {
+        if (this._queue.length) {
+            return this._queue.shift();
+        }
+        else {
+            throw new Error('Empty Queue');
+        }
+    }
+
     queue() {
         return this._queue;
     }
