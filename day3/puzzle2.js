@@ -18,30 +18,29 @@ let p1 = utils.makePath(w1);
 let startPoint = [0, 0];
 let w2Steps = 0;
 
-w2.some(s => {
+w2.some((s) => {
+  console.log(s);
+  let p2 = utils.makePath([s], startPoint);
+  // console.log(p2);
+  let intersections = utils.getIntesections(p1.slice(1), p2.slice(1));
 
-    console.log(s);
-    let p2 = utils.makePath([s], startPoint);
-    // console.log(p2);
-    let intersections = utils.getIntesections(p1.slice(1), p2.slice(1));
-
-    if (intersections.length) {
-        console.log('intersections', intersections);
-        let firstW2Intersection = intersections[0];
-        console.log('firstW2Intersection', firstW2Intersection);
-        w2Steps += p2.indexOf(firstW2Intersection)+1;
-        console.log('w2Steps', w2Steps);
-        let w1Steps = p1.indexOf(firstW2Intersection);
-        console.log('w1Steps', w1Steps);
-
-        Rta = w1Steps + w2Steps;
-        return true;
-    }
-
-    w2Steps += p2.length;
+  if (intersections.length) {
+    console.log('intersections', intersections);
+    let firstW2Intersection = intersections[0];
+    console.log('firstW2Intersection', firstW2Intersection);
+    w2Steps += p2.indexOf(firstW2Intersection) + 1;
     console.log('w2Steps', w2Steps);
-    startPoint = p2[p2.length-1];
-    return false;
+    let w1Steps = p1.indexOf(firstW2Intersection);
+    console.log('w1Steps', w1Steps);
+
+    Rta = w1Steps + w2Steps;
+    return true;
+  }
+
+  w2Steps += p2.length;
+  console.log('w2Steps', w2Steps);
+  startPoint = p2[p2.length - 1];
+  return false;
 });
 
 console.log('Rta', Rta);

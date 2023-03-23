@@ -1,11 +1,11 @@
-const { parseReactions, getOREs, reactions, waste, reset } = require("./utils");
-const { inputReal } = require("./inputs");
+const { parseReactions, getOREs, reactions, waste, reset } = require('./utils');
+const { inputReal } = require('./inputs');
 
 reset();
 
 parseReactions(inputReal);
 
-console.log(getOREs("FUEL", 1));
+console.log(getOREs('FUEL', 1));
 // console.log(waste);
 
 // Rta1: 278404

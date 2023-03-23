@@ -1,4 +1,4 @@
-const Moon = require("./utils").Moon;
+const Moon = require('./utils').Moon;
 
 // <x=-5, y=6, z=-11>
 // <x=-8, y=-4, z=-2>
@@ -39,11 +39,11 @@ let europaE = Europa.energy();
 let ganymedeE = Ganymede.energy();
 let callistoE = Callisto.energy();
 
-console.log("Io", Io.getPos(), Io.getVel(), ioE);
-console.log("Europa", Europa.getPos(), Europa.getVel(), europaE);
-console.log("Ganymede", Ganymede.getPos(), Ganymede.getVel(), ganymedeE);
-console.log("Callisto", Callisto.getPos(), Callisto.getVel(), callistoE);
+console.log('Io', Io.getPos(), Io.getVel(), ioE);
+console.log('Europa', Europa.getPos(), Europa.getVel(), europaE);
+console.log('Ganymede', Ganymede.getPos(), Ganymede.getVel(), ganymedeE);
+console.log('Callisto', Callisto.getPos(), Callisto.getVel(), callistoE);
 Rta = ioE + europaE + ganymedeE + callistoE;
-console.log("Rta", Rta);
+console.log('Rta', Rta);
 
 // Rta 13399

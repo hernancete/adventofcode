@@ -2,9 +2,9 @@ const reactions = [];
 const waste = {};
 
 function parseReactions(input) {
-  input.split("\n").forEach((react) => {
-    const [formula, result] = react.split("=>");
-    const [resultQtty, resultChemical] = result.trim().split(" ");
+  input.split('\n').forEach((react) => {
+    const [formula, result] = react.split('=>');
+    const [resultQtty, resultChemical] = result.trim().split(' ');
     const resultChemicalTrimmed = resultChemical.trim();
     reactions[resultChemicalTrimmed] = {
       qtty: parseInt(resultQtty),
@@ -12,9 +12,9 @@ function parseReactions(input) {
     };
     formula
       .trim()
-      .split(",")
+      .split(',')
       .forEach((part) => {
-        const [partQtty, partChemical] = part.trim().split(" ");
+        const [partQtty, partChemical] = part.trim().split(' ');
         reactions[resultChemicalTrimmed].formula.push({
           qtty: parseInt(partQtty),
           chemical: partChemical.trim(),
@@ -30,7 +30,7 @@ function reset() {
 }
 
 function getOREs(chemical, qtty = 1) {
-  if (chemical === "ORE") return qtty;
+  if (chemical === 'ORE') return qtty;
 
   if (!waste[chemical]) waste[chemical] = 0;
 

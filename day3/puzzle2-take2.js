@@ -14,15 +14,15 @@ let p2 = utils.makePath(w2);
 
 let intersections = utils.getIntesections(p1.slice(1), p2.slice(1));
 
-let steps = intersections.map(i => {
-    let w1Steps = p1.findIndex(el => el[0]==i[0]&&el[1]==i[1]);
-    let w2Steps = p2.findIndex(el => el[0]==i[0]&&el[1]==i[1]);
-    return (w1Steps == -1 || w1Steps == -1)? -1 : w1Steps + w2Steps;
+let steps = intersections.map((i) => {
+  let w1Steps = p1.findIndex((el) => el[0] == i[0] && el[1] == i[1]);
+  let w2Steps = p2.findIndex((el) => el[0] == i[0] && el[1] == i[1]);
+  return w1Steps == -1 || w1Steps == -1 ? -1 : w1Steps + w2Steps;
 });
 
-steps = steps.filter(i => i>0);
+steps = steps.filter((i) => i > 0);
 
-Rta = steps.sort((a, b) => a-b)[0];
+Rta = steps.sort((a, b) => a - b)[0];
 
 console.log(intersections);
 console.log(steps);

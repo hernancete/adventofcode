@@ -1,6 +1,6 @@
-const u = require("./utils.js");
+const u = require('./utils.js');
 
-const input = require("./input.js");
+const input = require('./input.js');
 // const input = [
 //     'COM)B',
 //     'B)C',
@@ -25,22 +25,22 @@ let elements = input.slice();
 // });
 // console.log(elements);
 
-u.title("Reordering input");
+u.title('Reordering input');
 
 let ordered = u.sortInput(elements);
 // console.log(ordered);
 
-u.title("Making sub-paths");
+u.title('Making sub-paths');
 
 let paths = u.makePaths(ordered);
 // console.log(paths);
 
-console.log("paths", paths.length);
+console.log('paths', paths.length);
 Rta = 0;
 for (let p of paths) {
-  console.log(p.toString(), "(" + p.totalOrbits().toString() + ")");
+  console.log(p.toString(), '(' + p.totalOrbits().toString() + ')');
   Rta += p.totalOrbits();
 }
 
-u.title("Rta " + Rta);
+u.title('Rta ' + Rta);
 // Rta 322508
