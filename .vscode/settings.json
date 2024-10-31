@@ -3,8 +3,12 @@
     "configFile": ".eslintrc"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true,
-    "source.fixAll.eslint": true
+    "source.fixAll.tslint": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": {
+    "editor.guides.indentation": false,
+    "editor.tabSize": 2
+  }
 }
