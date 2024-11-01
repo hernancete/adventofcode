@@ -2,10 +2,6 @@
   "eslint.options": {
     "configFile": ".eslintrc"
   },
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.tslint": "explicit",
-  //   "source.fixAll.eslint": "explicit"
-  // },
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
   /*"editor.defaultFormatter": "esbenp.prettier-vscode"*/
