@@ -2,12 +2,17 @@ import fs from 'fs';
 
 export class Puzzle1 {
 
-  constructor() { }
+  input: string[];
+
+  constructor() {
+    this.input = [];
+  }
 
   readInput(inputFile: string): string[] {
     const input = fs.readFileSync(inputFile, 'utf8');
     const inputLines = input.split('\n').filter(l => l);
-    return inputLines;
+    this.input = inputLines;
+    return this.input;
   }
 
   getFirstDigit(line: string): string {
