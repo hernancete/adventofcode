@@ -2,14 +2,16 @@ import fs from 'fs';
 
 export class Puzzle1 {
 
-  input: string[];
+  inputFile: string;
+  input: string[] = [];
 
-  constructor() {
-    this.input = [];
+  constructor(inputFile: string) {
+    this.inputFile = inputFile;
+    this.readInput();
   }
 
-  readInput(inputFile: string): string[] {
-    const input = fs.readFileSync(inputFile, 'utf8');
+  readInput(): string[] {
+    const input = fs.readFileSync(this.inputFile, 'utf8');
     const inputLines = input.split('\n').filter(l => l);
     this.input = inputLines;
     return this.input;

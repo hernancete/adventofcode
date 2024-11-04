@@ -31,42 +31,39 @@ describe('Day1 Puzzle1', () => {
   describe('Reading input file', () => {
 
     test('Should read the input', () => {
-      const puzzle1 = new Puzzle1();
-      const input = puzzle1.readInput(path.resolve(inputSample));
+      const puzzle1 = new Puzzle1(path.resolve(inputSample));
+      // const input = puzzle1.readInput(path.resolve(inputSample));
 
-      expect(input).not.toBeNull();
-      expect(input).toBeInstanceOf(Array);
-      expect(input.length).toBe(10);
-      expect(input).toContain(thirdInputLine);
+      expect(puzzle1.input).not.toBeNull();
+      expect(puzzle1.input).toBeInstanceOf(Array);
+      expect(puzzle1.input.length).toBe(10);
+      expect(puzzle1.input).toContain(thirdInputLine);
     });
 
     test('Should read the input with no ending new line', () => {
-      const puzzle1 = new Puzzle1();
-      const input = puzzle1.readInput(path.resolve(inputSampleNoNewLine));
+      const puzzle1 = new Puzzle1(path.resolve(inputSampleNoNewLine));
 
-      expect(input).not.toBeNull();
-      expect(input).toBeInstanceOf(Array);
-      expect(input.length).toBe(10);
-      expect(input).toContain(thirdInputLine);
+      expect(puzzle1.input).not.toBeNull();
+      expect(puzzle1.input).toBeInstanceOf(Array);
+      expect(puzzle1.input.length).toBe(10);
+      expect(puzzle1.input).toContain(thirdInputLine);
     });
   });
 
   describe('Getting individual digits', () => {
     test('Should get the first digit', () => {
-      const puzzle1: Puzzle1 = new Puzzle1();
-      const input = puzzle1.readInput(path.resolve(inputSample));
+      const puzzle1: Puzzle1 = new Puzzle1(path.resolve(inputSample));
 
-      for (const i in input) {
-        expect(puzzle1.getFirstDigit(input[i])).toBe(inputSampleDigits[i][FIRST_DIGIT_KEY]);
+      for (const i in puzzle1.input) {
+        expect(puzzle1.getFirstDigit(puzzle1.input[i])).toBe(inputSampleDigits[i][FIRST_DIGIT_KEY]);
       }
     });
 
     test('Should get the last digit', () => {
-      const puzzle1: Puzzle1 = new Puzzle1();
-      const input = puzzle1.readInput(path.resolve(inputSample));
+      const puzzle1: Puzzle1 = new Puzzle1(path.resolve(inputSample));
 
-      for (const i in input) {
-        expect(puzzle1.getLastDigit(input[i])).toBe(inputSampleDigits[i][LAST_DIGIT_KEY]);
+      for (const i in puzzle1.input) {
+        expect(puzzle1.getLastDigit(puzzle1.input[i])).toBe(inputSampleDigits[i][LAST_DIGIT_KEY]);
       }
     });
 
