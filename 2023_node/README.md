@@ -7,6 +7,12 @@ __Run tests__
 npm test
 ```
 
+__Run one specific test__
+For example run  day 1, puzzle 2's tests
+```bash
+npm test -- test/day1/puzzle2.test.ts
+```
+
 __Build__
 ```bash
 npm run build
