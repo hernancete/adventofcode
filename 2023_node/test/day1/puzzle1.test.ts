@@ -12,7 +12,7 @@ const inputSampleDigits = [
   ['6', '6'],
   ['6', '9'],
   ['9', '1'],
-  ['3', '3'],
+  ['3', '1'],
   ['5', '5'],
   ['7', '9'],
   ['1', '9'],
@@ -21,6 +21,7 @@ const inputSampleDigits = [
 ];
 
 const FIRST_DIGIT_KEY = 0;
+const LAST_DIGIT_KEY = 1;
 
 describe('Day1 Puzzle1', () => {
   test('First dummy test', () => {
@@ -50,7 +51,7 @@ describe('Day1 Puzzle1', () => {
     });
   });
 
-  describe('Getting first digit', () => {
+  describe('Getting individual digits', () => {
     test('Should get the first digit', () => {
       const puzzle1: Puzzle1 = new Puzzle1();
       const input = puzzle1.readInput(path.resolve(inputSample));
@@ -59,6 +60,17 @@ describe('Day1 Puzzle1', () => {
         expect(puzzle1.getFirstDigit(input[i])).toBe(inputSampleDigits[i][FIRST_DIGIT_KEY]);
       }
     });
+
+    test('Should get the last digit', () => {
+      const puzzle1: Puzzle1 = new Puzzle1();
+      const input = puzzle1.readInput(path.resolve(inputSample));
+
+      for (const i in input) {
+        expect(puzzle1.getLastDigit(input[i])).toBe(inputSampleDigits[i][LAST_DIGIT_KEY]);
+      }
+    });
+
   });
+
 
 });
