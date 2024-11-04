@@ -30,3 +30,4 @@ node dist/day1/runPuzzle1.js
 | Day - Puzzle | Result |
 | :--- | :---: |
 | Day 1, Puzzle 1 | 56465 |
+| Day 1, Puzzle 2 | 55902 |
