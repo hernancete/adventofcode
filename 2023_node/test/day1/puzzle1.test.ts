@@ -7,6 +7,21 @@ const inputSample = './test/day1/inputSample.txt';
 const inputSampleNoNewLine = './test/day1/inputSampleNoNewLine.txt';
 const thirdInputLine = 'ninevbmltwo69';
 
+const inputSampleDigits = [
+  ['1', '1'],
+  ['6', '6'],
+  ['6', '9'],
+  ['9', '1'],
+  ['3', '3'],
+  ['5', '5'],
+  ['7', '9'],
+  ['1', '9'],
+  ['3', '3'],
+  ['2', '2'],
+];
+
+const FIRST_DIGIT_KEY = 0;
+
 describe('Day1 Puzzle1', () => {
   test('First dummy test', () => {
     expect(1).toBe(1);
@@ -33,6 +48,17 @@ describe('Day1 Puzzle1', () => {
       expect(input.length).toBe(10);
       expect(input).toContain(thirdInputLine);
     });
-  })
+  });
+
+  describe('Getting first digit', () => {
+    test('Should get the first digit', () => {
+      const puzzle1: Puzzle1 = new Puzzle1();
+      const input = puzzle1.readInput(path.resolve(inputSample));
+
+      for (const i in input) {
+        expect(puzzle1.getFirstDigit(input[i])).toBe(inputSampleDigits[i][FIRST_DIGIT_KEY]);
+      }
+    });
+  });
 
 });
