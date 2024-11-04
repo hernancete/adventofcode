@@ -17,3 +17,10 @@ For example, run first day's puzzle 1.
 ```bash
 node dist/day1/runPuzzle1.js
 ```
+
+
+### Puzzle's results
+
+| Day - Puzzle | Result |
+| :--- | :---: |
+| Day 1, Puzzle 1 | 56465 |
