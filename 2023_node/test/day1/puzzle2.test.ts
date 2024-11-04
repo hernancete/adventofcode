@@ -46,4 +46,11 @@ describe('Reading both digits and spelled numbers', () => {
     }
   });
 
+  test('Should read last digit as digit or spelled number', () => {
+    const puzzle2 = new Puzzle2(path.resolve(inputSample));
+    for (const i in puzzle2.input) {
+      expect(puzzle2.getLastDigit(puzzle2.input[i])).toBe(inputSampleDigits[i][LAST_DIGIT_KEY]);
+    }
+  });
+
 });
