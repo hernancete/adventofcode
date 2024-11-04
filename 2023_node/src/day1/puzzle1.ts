@@ -12,7 +12,6 @@ export class Puzzle1 {
   }
 
   readInput(): string[] {
-    console.log('INPUT FILE', this.inputFile);
     const input = fs.readFileSync(this.inputFile, 'utf8');
     const inputLines = input.split('\n').filter(l => l);
     this.input = inputLines;

@@ -1,0 +1,19 @@
+# 2023_node
+
+### Some commands:
+
+__Run tests__
+```bash
+npm test
+```
+
+__Build__
+```bash
+npm run build
+```
+
+__Run some day's puzzle__
+For example, run first day's puzzle 1.
+```bash
+node dist/day1/runPuzzle1.js
+```
