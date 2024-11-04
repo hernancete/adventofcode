@@ -4,12 +4,14 @@
   "description": "I'll try to make this using TDD",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && sh scripts/copyfiles.sh",
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^29.5.14",
+    "copyfiles": "^2.4.1",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5"
   },
