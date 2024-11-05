@@ -10,8 +10,8 @@ const inputSampleParsed = [
   { id: 4, maxBlue: 15, maxRed: 14, maxGreen: 3, feasible: false },
   { id: 5, maxBlue: 2, maxRed: 6, maxGreen: 3, feasible: true },
 ];
-
 const gameRules = { blue: 14, red: 12, green: 13 };
+const answer = 8;
 
 test('Should read the input', () => {
   const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
@@ -79,5 +79,15 @@ describe('Evaluating game feasibility', () => {
         puzzle1.evaluateGameRecordFeasibilityByCubeAmount(puzzle1.input[i])
       ).toBe(inputSampleParsed[i].feasible);
     }
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    puzzle1.setGameRules(gameRules);
+
+    expect(puzzle1.solve()).toBe(answer);
   });
 });

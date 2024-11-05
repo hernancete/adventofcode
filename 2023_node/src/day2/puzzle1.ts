@@ -9,7 +9,7 @@ export class Puzzle1 {
     this.input = readFileLines(inputFile);
   }
 
-  parseLineId(line: string): Object {
+  parseLineId(line: string): number {
     // Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
     const matches = line.match(/Game ([0-9]+):/);
     const id = parseInt(matches ? matches[1] : '1');
@@ -44,5 +44,14 @@ export class Puzzle1 {
     const maxRed = this.parseLineMaxRed(gameRecord);
     const maxGreen = this.parseLineMaxGreen(gameRecord);
     return maxBlue <= this.rules.blue && maxRed <= this.rules.red && maxGreen <= this.rules.green;
+  }
+
+  solve(): number {
+    return this.input.reduce((prev, curr) => {
+      if (this.evaluateGameRecordFeasibilityByCubeAmount(curr)) {
+        return prev + this.parseLineId(curr);
+      }
+      return prev;
+    }, 0);
   }
 };
