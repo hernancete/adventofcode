@@ -10,6 +10,7 @@ const inputSampleParsed = [
   { id: 4, minPower: 630 },
   { id: 5, minPower: 36 },
 ];
+const answer = 2286;
 
 describe('Reading the input', () => {
 
@@ -30,5 +31,14 @@ describe('Getting minimum set of cubes\' power', () => {
     for (const i in puzzle2.input) {
       expect(puzzle2.parseGameRecordMinPower(puzzle2.input[i])).toBe(inputSampleParsed[i].minPower);
     }
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle2.solve()).toBe(answer);
   });
 });

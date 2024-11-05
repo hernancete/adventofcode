@@ -8,4 +8,10 @@ export class Puzzle2 extends Puzzle1 {
     const maxGreen = this.parseGameRecordMaxGreen(gameRecord);
     return maxBlue * maxRed * maxGreen;
   }
+
+  solve(): number {
+    return this.input.reduce((prev, curr) => {
+      return prev + this.parseGameRecordMinPower(curr);
+    }, 0);
+  }
 }
