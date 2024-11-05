@@ -69,4 +69,15 @@ describe('Evaluating game feasibility', () => {
     expect(puzzle1.rules).toHaveProperty('red', 12);
     expect(puzzle1.rules).toHaveProperty('green', 13);
   });
+
+  test('Should evaluate if game is feasible', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    puzzle1.setGameRules(gameRules);
+
+    for (const i in puzzle1.input) {
+      expect(
+        puzzle1.evaluateGameRecordFeasibilityByCubeAmount(puzzle1.input[i])
+      ).toBe(inputSampleParsed[i].feasible);
+    }
+  });
 });

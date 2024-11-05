@@ -3,7 +3,7 @@ import { readFileLines } from "../shared/utils";
 export class Puzzle1 {
 
   input: string[];
-  rules: Object = {};
+  rules: any = {};
 
   constructor(inputFile: string) {
     this.input = readFileLines(inputFile);
@@ -37,5 +37,12 @@ export class Puzzle1 {
   setGameRules(rules: any): any {
     this.rules = rules;
     return this.rules;
+  }
+
+  evaluateGameRecordFeasibilityByCubeAmount(gameRecord: string): boolean {
+    const maxBlue = this.parseLineMaxBlue(gameRecord);
+    const maxRed = this.parseLineMaxRed(gameRecord);
+    const maxGreen = this.parseLineMaxGreen(gameRecord);
+    return maxBlue <= this.rules.blue && maxRed <= this.rules.red && maxGreen <= this.rules.green;
   }
 };
