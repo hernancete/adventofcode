@@ -15,7 +15,10 @@ export class Puzzle1 {
     this.input = readFileLines(inputFile);
   }
 
-  // parseLine(line: string): Object {
-  //   return { id: 1, blue: 0, red: 0, green: 0 };
-  // }
+  parseLine(line: string): Object {
+    // Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
+    const matches = line.match(/Game ([0-9]+):/);
+    const id = parseInt(matches ? matches[1] : '1');
+    return { id, blue: 0, red: 0, green: 0 };
+  }
 };
