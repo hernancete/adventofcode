@@ -1,15 +1,9 @@
 import { readFileLines } from "../shared/utils";
 
-// interface gameRecord {
-//   id: number,
-//   blue: number,
-//   red: number,
-//   green: number,
-// };
-
 export class Puzzle1 {
 
   input: string[];
+  rules: Object = {};
 
   constructor(inputFile: string) {
     this.input = readFileLines(inputFile);
@@ -38,5 +32,10 @@ export class Puzzle1 {
     const greenMatches = line.match(/([0-9]+) green/g);
     const maxGreen = Math.max(...(greenMatches?.map(mg => parseInt(mg.replace(' green', ''))) || [0]))
     return maxGreen;
+  }
+
+  setGameRules(rules: any): any {
+    this.rules = rules;
+    return this.rules;
   }
 };
