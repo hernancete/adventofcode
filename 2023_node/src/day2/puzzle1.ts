@@ -19,6 +19,16 @@ export class Puzzle1 {
     // Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
     const matches = line.match(/Game ([0-9]+):/);
     const id = parseInt(matches ? matches[1] : '1');
-    return { id, blue: 0, red: 0, green: 0 };
+
+    const blueMatches = line.match(/([0-9]+) blue/g);
+    const maxBlue = Math.max(...(blueMatches?.map(mb => parseInt(mb.replace(' blue', ''))) || [0]))
+
+    const redMatches = line.match(/([0-9]+) red/g);
+    const maxRed = Math.max(...(redMatches?.map(mr => parseInt(mr.replace(' red', ''))) || [0]))
+
+    const greenMatches = line.match(/([0-9]+) green/g);
+    const maxGreen = Math.max(...(greenMatches?.map(mg => parseInt(mg.replace(' green', ''))) || [0]))
+
+    return { id, maxBlue, maxRed, maxGreen };
   }
 };
