@@ -27,7 +27,7 @@ describe('Parsing game records', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
 
     for (const i in puzzle1.input) {
-      expect(puzzle1.parseLineId(puzzle1.input[i])).toBe(inputSampleParsed[i].id);
+      expect(puzzle1.parseGameRecordId(puzzle1.input[i])).toBe(inputSampleParsed[i].id);
     }
   });
 
@@ -35,7 +35,7 @@ describe('Parsing game records', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
 
     for (const i in puzzle1.input) {
-      expect(puzzle1.parseLineMaxBlue(puzzle1.input[i])).toBe(inputSampleParsed[i].maxBlue);
+      expect(puzzle1.parseGameRecordMaxBlue(puzzle1.input[i])).toBe(inputSampleParsed[i].maxBlue);
     }
   });
 
@@ -43,7 +43,7 @@ describe('Parsing game records', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
 
     for (const i in puzzle1.input) {
-      expect(puzzle1.parseLineMaxRed(puzzle1.input[i])).toBe(inputSampleParsed[i].maxRed);
+      expect(puzzle1.parseGameRecordMaxRed(puzzle1.input[i])).toBe(inputSampleParsed[i].maxRed);
     }
   });
 
@@ -51,7 +51,7 @@ describe('Parsing game records', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
 
     for (const i in puzzle1.input) {
-      expect(puzzle1.parseLineMaxGreen(puzzle1.input[i])).toBe(inputSampleParsed[i].maxGreen);
+      expect(puzzle1.parseGameRecordMaxGreen(puzzle1.input[i])).toBe(inputSampleParsed[i].maxGreen);
     }
   });
 });

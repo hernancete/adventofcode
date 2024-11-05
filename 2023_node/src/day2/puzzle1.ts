@@ -9,26 +9,26 @@ export class Puzzle1 {
     this.input = readFileLines(inputFile);
   }
 
-  parseLineId(line: string): number {
+  parseGameRecordId(line: string): number {
     // Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
     const matches = line.match(/Game ([0-9]+):/);
     const id = parseInt(matches ? matches[1] : '1');
     return id;
   }
 
-  parseLineMaxBlue(line: string): Object {
+  parseGameRecordMaxBlue(line: string): number {
     const blueMatches = line.match(/([0-9]+) blue/g);
     const maxBlue = Math.max(...(blueMatches?.map(mb => parseInt(mb.replace(' blue', ''))) || [0]))
     return maxBlue;
   }
 
-  parseLineMaxRed(line: string): Object {
+  parseGameRecordMaxRed(line: string): number {
     const redMatches = line.match(/([0-9]+) red/g);
     const maxRed = Math.max(...(redMatches?.map(mr => parseInt(mr.replace(' red', ''))) || [0]))
     return maxRed;
   }
 
-  parseLineMaxGreen(line: string): Object {
+  parseGameRecordMaxGreen(line: string): number {
     const greenMatches = line.match(/([0-9]+) green/g);
     const maxGreen = Math.max(...(greenMatches?.map(mg => parseInt(mg.replace(' green', ''))) || [0]))
     return maxGreen;
@@ -40,16 +40,16 @@ export class Puzzle1 {
   }
 
   evaluateGameRecordFeasibilityByCubeAmount(gameRecord: string): boolean {
-    const maxBlue = this.parseLineMaxBlue(gameRecord);
-    const maxRed = this.parseLineMaxRed(gameRecord);
-    const maxGreen = this.parseLineMaxGreen(gameRecord);
+    const maxBlue = this.parseGameRecordMaxBlue(gameRecord);
+    const maxRed = this.parseGameRecordMaxRed(gameRecord);
+    const maxGreen = this.parseGameRecordMaxGreen(gameRecord);
     return maxBlue <= this.rules.blue && maxRed <= this.rules.red && maxGreen <= this.rules.green;
   }
 
   solve(): number {
     return this.input.reduce((prev, curr) => {
       if (this.evaluateGameRecordFeasibilityByCubeAmount(curr)) {
-        return prev + this.parseLineId(curr);
+        return prev + this.parseGameRecordId(curr);
       }
       return prev;
     }, 0);
