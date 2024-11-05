@@ -8,8 +8,8 @@ const inputSampleParsed = [
   {
     len: 2,
     potentialMotorParts: [
-      { value: 467, startIndx: 0, endIndx: 2, inline: false },
-      { value: 114, startIndx: 5, endIndx: 7, inline: false }
+      { value: 467, startIndx: 0, endIndx: 2, inline: false, above: false, below: true },
+      { value: 114, startIndx: 5, endIndx: 7, inline: false, above: false, below: false }
     ]
   },
   {
@@ -19,8 +19,8 @@ const inputSampleParsed = [
   {
     len: 2,
     potentialMotorParts: [
-      { value: 35, startIndx: 2, endIndx: 3, inline: false },
-      { value: 633, startIndx: 6, endIndx: 8, inline: false }
+      { value: 35, startIndx: 2, endIndx: 3, inline: false, above: true, below: false },
+      { value: 633, startIndx: 6, endIndx: 8, inline: false, above: false, below: true }
     ]
   },
   {
@@ -30,25 +30,25 @@ const inputSampleParsed = [
   {
     len: 1,
     potentialMotorParts: [
-      { value: 617, startIndx: 0, endIndx: 2, inline: true }
+      { value: 617, startIndx: 0, endIndx: 2, inline: true, above: false, below: false }
     ]
   },
   {
     len: 1,
     potentialMotorParts: [
-      { value: 58, startIndx: 7, endIndx: 8, inline: false }
+      { value: 58, startIndx: 7, endIndx: 8, inline: false, above: false, below: false }
     ]
   },
   {
     len: 1,
     potentialMotorParts: [
-      { value: 592, startIndx: 2, endIndx: 4, inline: false }
+      { value: 592, startIndx: 2, endIndx: 4, inline: false, above: true, below: false }
     ]
   },
   {
     len: 1,
     potentialMotorParts: [
-      { value: 755, startIndx: 6, endIndx: 8, inline: false }
+      { value: 755, startIndx: 6, endIndx: 8, inline: false, above: false, below: true }
     ]
   },
   {
@@ -58,8 +58,8 @@ const inputSampleParsed = [
   {
     len: 2,
     potentialMotorParts: [
-      { value: 664, startIndx: 1, endIndx: 3, inline: false },
-      { value: 598, startIndx: 5, endIndx: 7, inline: false }
+      { value: 664, startIndx: 1, endIndx: 3, inline: false, above: true, below: false },
+      { value: 598, startIndx: 5, endIndx: 7, inline: false, above: true, below: false }
     ]
   },
 ];
@@ -119,7 +119,7 @@ describe('Parsing motor parts', () => {
 
 describe('Looking for adjacent symbols', () => {
 
-  test('Should get adjacent symbols on the same line', () => {
+  test('Should check for the existance of adjacent symbols on the same line', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
 
     for (const i in puzzle1.input) {
@@ -127,6 +127,30 @@ describe('Looking for adjacent symbols', () => {
       potentialMotorParts.forEach(((pmp, pmpIndx) => {
         const adjacentSymbolInline = puzzle1.isThereAnAdjacentSymbolInline(pmp, puzzle1.input[i]);
         expect(adjacentSymbolInline).toBe(inputSampleParsed[i].potentialMotorParts[pmpIndx].inline);
+      }));
+    }
+  });
+
+  test('Should check for the existance of adjacent symbols on the line above', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    for (let i = 1; i < puzzle1.input.length; i++) {
+      const potentialMotorParts = puzzle1.getPotentialMotorParts(puzzle1.input[i]);
+      potentialMotorParts.forEach(((pmp, pmpIndx) => {
+        const adjacentSymbolAbove = puzzle1.isThereAnAdjacentSymbolAbove(pmp, i);
+        expect(adjacentSymbolAbove).toBe(inputSampleParsed[i].potentialMotorParts[pmpIndx].above);
+      }));
+    }
+  });
+
+  test('Should check for the existance of adjacent symbols on the line below', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    for (let i = 0; i < puzzle1.input.length - 1; i++) {
+      const potentialMotorParts = puzzle1.getPotentialMotorParts(puzzle1.input[i]);
+      potentialMotorParts.forEach(((pmp, pmpIndx) => {
+        const adjacentSymbolBelow = puzzle1.isThereAnAdjacentSymbolBelow(pmp, i);
+        expect(adjacentSymbolBelow).toBe(inputSampleParsed[i].potentialMotorParts[pmpIndx].below);
       }));
     }
   });

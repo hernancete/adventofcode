@@ -44,4 +44,20 @@ export class Puzzle1 {
     }
     return false;
   }
+
+  private isThereAnAdjacentSymbolInOtherLine(potentialMotorPart: motorPart, line: string): boolean {
+    const startIndx = potentialMotorPart.startIndx === 0 ? 0 : potentialMotorPart.startIndx! - 1;
+    const endIndx = potentialMotorPart.endIndx === line.length - 1 ? line.length - 1 : potentialMotorPart.endIndx! + 1;
+    return symbolsRegex.test(line.slice(startIndx, endIndx + 1));
+  }
+
+  isThereAnAdjacentSymbolAbove(potentialMotorPart: motorPart, lineIndex: number): boolean {
+    const line = this.input[lineIndex - 1];
+    return this.isThereAnAdjacentSymbolInOtherLine(potentialMotorPart, line);
+  }
+
+  isThereAnAdjacentSymbolBelow(potentialMotorPart: motorPart, lineIndex: number): boolean {
+    const line = this.input[lineIndex + 1];
+    return this.isThereAnAdjacentSymbolInOtherLine(potentialMotorPart, line);
+  }
 };
