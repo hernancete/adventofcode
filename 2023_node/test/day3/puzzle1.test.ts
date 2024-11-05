@@ -5,16 +5,63 @@ import { Puzzle1, motorPart } from '../../src/day3/puzzle1';
 const inputSample = './input.txt';
 const inputSampleThirdLine = '..35..633.';
 const inputSampleParsed = [
-  { len: 2, potentialMotorParts: [{ value: 467, startIndx: 0, endIndx: 2 }, { value: 114, startIndx: 5, endIndx: 7 }] },
-  { len: 0, potentialMotorParts: [] },
-  { len: 2, potentialMotorParts: [{ value: 35, startIndx: 2, endIndx: 3 }, { value: 633, startIndx: 6, endIndx: 8 }] },
-  { len: 0, potentialMotorParts: [] },
-  { len: 1, potentialMotorParts: [{ value: 617, startIndx: 0, endIndx: 2 }] },
-  { len: 1, potentialMotorParts: [{ value: 58, startIndx: 7, endIndx: 8 }] },
-  { len: 1, potentialMotorParts: [{ value: 592, startIndx: 2, endIndx: 4 }] },
-  { len: 1, potentialMotorParts: [{ value: 755, startIndx: 6, endIndx: 8 }] },
-  { len: 0, potentialMotorParts: [] },
-  { len: 2, potentialMotorParts: [{ value: 664, startIndx: 1, endIndx: 3 }, { value: 598, startIndx: 5, endIndx: 7 }] },
+  {
+    len: 2,
+    potentialMotorParts: [
+      { value: 467, startIndx: 0, endIndx: 2, inline: false },
+      { value: 114, startIndx: 5, endIndx: 7, inline: false }
+    ]
+  },
+  {
+    len: 0,
+    potentialMotorParts: []
+  },
+  {
+    len: 2,
+    potentialMotorParts: [
+      { value: 35, startIndx: 2, endIndx: 3, inline: false },
+      { value: 633, startIndx: 6, endIndx: 8, inline: false }
+    ]
+  },
+  {
+    len: 0,
+    potentialMotorParts: []
+  },
+  {
+    len: 1,
+    potentialMotorParts: [
+      { value: 617, startIndx: 0, endIndx: 2, inline: true }
+    ]
+  },
+  {
+    len: 1,
+    potentialMotorParts: [
+      { value: 58, startIndx: 7, endIndx: 8, inline: false }
+    ]
+  },
+  {
+    len: 1,
+    potentialMotorParts: [
+      { value: 592, startIndx: 2, endIndx: 4, inline: false }
+    ]
+  },
+  {
+    len: 1,
+    potentialMotorParts: [
+      { value: 755, startIndx: 6, endIndx: 8, inline: false }
+    ]
+  },
+  {
+    len: 0,
+    potentialMotorParts: []
+  },
+  {
+    len: 2,
+    potentialMotorParts: [
+      { value: 664, startIndx: 1, endIndx: 3, inline: false },
+      { value: 598, startIndx: 5, endIndx: 7, inline: false }
+    ]
+  },
 ];
 
 describe('Reading the input', () => {
@@ -67,5 +114,20 @@ describe('Parsing motor parts', () => {
     expect(potentialMotorPartsFifthLine[0]).toHaveProperty('value', 617);
     expect(potentialMotorPartsFifthLine[0]).toHaveProperty('startIndx', 0);
     expect(potentialMotorPartsFifthLine[0]).toHaveProperty('endIndx', 2);
+  });
+});
+
+describe('Looking for adjacent symbols', () => {
+
+  test('Should get adjacent symbols on the same line', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    for (const i in puzzle1.input) {
+      const potentialMotorParts = puzzle1.getPotentialMotorParts(puzzle1.input[i]);
+      potentialMotorParts.forEach(((pmp, pmpIndx) => {
+        const adjacentSymbolInline = puzzle1.isThereAnAdjacentSymbolInline(pmp, puzzle1.input[i]);
+        expect(adjacentSymbolInline).toBe(inputSampleParsed[i].potentialMotorParts[pmpIndx].inline);
+      }));
+    }
   });
 });

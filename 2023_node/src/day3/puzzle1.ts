@@ -6,6 +6,8 @@ export interface motorPart {
   endIndx?: number,
 }
 
+export const symbolsRegex = /[^0-9\.]/;
+
 export class Puzzle1 {
 
   input: string[];
@@ -27,5 +29,19 @@ export class Puzzle1 {
       });
     });
     return motorParts;
+  }
+
+  isThereAnAdjacentSymbolInline(potentialMotorPart: motorPart, line: string): boolean {
+    if (potentialMotorPart.startIndx! > 0) {
+      if (symbolsRegex.test(line[potentialMotorPart.startIndx! - 1])) {
+        return true;
+      }
+    }
+    if (potentialMotorPart.endIndx! < line.length - 1) {
+      if (symbolsRegex.test(line[potentialMotorPart.endIndx! + 1])) {
+        return true;
+      }
+    }
+    return false;
   }
 };
