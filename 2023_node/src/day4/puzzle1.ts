@@ -46,4 +46,13 @@ export class Card {
   }
 };
 
-export class Puzzle1 extends Puzzle { };
+export class Puzzle1 extends Puzzle {
+
+  cards: Card[] = [];
+
+  loadCards(): Card[] {
+    this.input.forEach(raw => this.cards.push(new Card(raw)));
+    return this.cards;
+  }
+
+};
