@@ -47,4 +47,16 @@ describe('Parsing cards', () => {
       expect(points).toBe(iscl.points);
     }
   });
+
+  test('Should get amount of coincidences', () => {
+
+    for (const iscl of inputSampleCardLines) {
+      const card = new Card(iscl.raw);
+      card.getWinningNumbers();
+      card.getNumbers();
+      const coincidences = card.getCoincidencesAmount();
+
+      expect(coincidences).toBe(iscl.coincidences.length);
+    }
+  });
 });

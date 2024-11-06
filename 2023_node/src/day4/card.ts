@@ -42,4 +42,11 @@ export class Card {
     }, 0);
     return pointsTable[coincidences];
   }
+
+  getCoincidencesAmount(): number {
+    const coincidences = this.numbers.reduce((prev, curr) => {
+      return prev + (this.winningNumbers.includes(curr) ? 1 : 0);
+    }, 0);
+    return coincidences;
+  }
 };
