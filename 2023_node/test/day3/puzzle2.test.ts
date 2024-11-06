@@ -4,6 +4,11 @@ import { Puzzle2 } from '../../src/day3/puzzle2';
 
 const inputSample = './input.txt';
 const inputSampleThirdLine = '..35..633.';
+const inputSamplePotentialGears = [
+  { gear: { line: 1, index: 3 }, inline: [] },
+  { gear: { line: 4, index: 3 }, inline: [617] },
+  { gear: { line: 8, index: 5 }, inline: [] },
+];
 
 describe('Reading the input', () => {
 
@@ -36,5 +41,16 @@ describe('Looking for gears', () => {
     expect(fifthLineGears).toBeInstanceOf(Array);
     expect(fifthLineGears).toHaveLength(1);
     expect(fifthLineGears).toEqual(expect.arrayContaining([expect.objectContaining({ line: 4, index: 3 })]));
+  });
+
+  test('Should get adjacent part numbers inline', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    for (const pg of inputSamplePotentialGears) {
+      const adjPartNumbInline = puzzle2.getAdjacentPartNumbersInline(pg.gear);
+      expect(adjPartNumbInline).toBeInstanceOf(Array);
+      expect(adjPartNumbInline).toHaveLength(pg.inline.length);
+      expect(adjPartNumbInline).toEqual(expect.arrayContaining(pg.inline));
+    }
   });
 });

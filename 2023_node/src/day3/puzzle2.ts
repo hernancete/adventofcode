@@ -20,4 +20,14 @@ export class Puzzle2 extends Puzzle1 {
     });
     return gears;
   }
+
+  getAdjacentPartNumbersInline(gear: gear): number[] {
+    const adjPartNumbers: number[] = [];
+    const partNumbersInline = this.getPotentialMotorParts(this.input[gear.line]);
+    partNumbersInline.forEach(pni => {
+      if (pni.endIndx === gear.index - 1) adjPartNumbers.push(pni.value);
+      else if (pni.startIndx === gear.index + 1) adjPartNumbers.push(pni.value);
+    });
+    return adjPartNumbers;
+  }
 };
