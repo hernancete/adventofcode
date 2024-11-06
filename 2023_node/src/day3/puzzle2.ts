@@ -31,31 +31,26 @@ export class Puzzle2 extends Puzzle1 {
     return adjPartNumbers;
   }
 
-  getAdjacentPartNumbersAbove(gear: gear): number[] {
+  getAdjacentPartNumbersOtherLine(gear: gear, line: string): number[] {
     const adjPartNumbers: number[] = [];
-    if (gear.line === 0) return adjPartNumbers;
-    const partNumbersAbove = this.getPotentialMotorParts(this.input[gear.line - 1]);
-    partNumbersAbove.forEach(pna => {
+    const partNumbersOtherLine = this.getPotentialMotorParts(line);
+    partNumbersOtherLine.forEach(pnol => {
       if (
-        (pna.startIndx! >= gear.index - 1 && pna.startIndx! <= gear.index + 1) ||
-        (pna.endIndx! >= gear.index - 1 && pna.endIndx! <= gear.index + 1)
+        (pnol.startIndx! >= gear.index - 1 && pnol.startIndx! <= gear.index + 1) ||
+        (pnol.endIndx! >= gear.index - 1 && pnol.endIndx! <= gear.index + 1)
       )
-        adjPartNumbers.push(pna.value);
+        adjPartNumbers.push(pnol.value);
     });
     return adjPartNumbers;
   }
 
+  getAdjacentPartNumbersAbove(gear: gear): number[] {
+    if (gear.line === 0) return [];
+    return this.getAdjacentPartNumbersOtherLine(gear, this.input[gear.line - 1]);
+  }
+
   getAdjacentPartNumbersBelow(gear: gear): number[] {
-    const adjPartNumbers: number[] = [];
-    if (gear.line === this.input.length - 1) return adjPartNumbers;
-    const partNumbersAbove = this.getPotentialMotorParts(this.input[gear.line + 1]);
-    partNumbersAbove.forEach(pnb => {
-      if (
-        (pnb.startIndx! >= gear.index - 1 && pnb.startIndx! <= gear.index + 1) ||
-        (pnb.endIndx! >= gear.index - 1 && pnb.endIndx! <= gear.index + 1)
-      )
-        adjPartNumbers.push(pnb.value);
-    });
-    return adjPartNumbers;
+    if (gear.line === this.input.length - 1) return [];
+    return this.getAdjacentPartNumbersOtherLine(gear, this.input[gear.line + 1]);
   }
 };
