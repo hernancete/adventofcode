@@ -27,10 +27,30 @@ node dist/day1/runPuzzle1.js
 
 ### Puzzle's results
 
-| Day, Puzzle | Result |
-| :--- | :---: |
-| Day 1, Puzzle 1 | 56465 |
-| Day 1, Puzzle 2 | 55902 |
-| Day 2, Puzzle 1 | 1867 |
-| Day 2, Puzzle 2 | 84538 |
-| Day 3, Puzzle 1 | 509115 |
+| Day   | Puzzle 1 | Puzzle 2 |
+| :---  | :---:    | :---:    |
+| Day 1 | 56465    | 55902    |
+| Day 2 | 1867     | 84538    |
+| Day 3 | 509115   | 75220503 |
+| Day 4 |||
+| Day 5 |||
+| Day 6 |||
+| Day 7 |||
+| Day 8 |||
+| Day 9 |||
+| Day 10 |||
+| Day 11 |||
+| Day 12 |||
+| Day 13 |||
+| Day 14 |||
+| Day 15 |||
+| Day 16 |||
+| Day 17 |||
+| Day 18 |||
+| Day 19 |||
+| Day 20 |||
+| Day 21 |||
+| Day 22 |||
+| Day 23 |||
+| Day 24 |||
+| Day 25 |||
