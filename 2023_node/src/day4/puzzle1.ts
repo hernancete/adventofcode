@@ -55,4 +55,11 @@ export class Puzzle1 extends Puzzle {
     return this.cards;
   }
 
+  solve(): number {
+    return this.cards.reduce((prev, curr) => {
+      curr.getWinningNumbers();
+      curr.getNumbers();
+      return prev + curr.getPoints();
+    }, 0);
+  }
 };
