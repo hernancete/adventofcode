@@ -11,6 +11,7 @@ export const symbolsRegex = /[^0-9\.]/;
 export class Puzzle1 {
 
   input: string[];
+  partNumbers: number[] = [];
 
   constructor(inputFile: string) {
     this.input = readFileLines(inputFile);
@@ -59,5 +60,19 @@ export class Puzzle1 {
   isThereAnAdjacentSymbolBelow(potentialMotorPart: motorPart, lineIndex: number): boolean {
     const line = this.input[lineIndex + 1];
     return this.isThereAnAdjacentSymbolInOtherLine(potentialMotorPart, line);
+  }
+
+  getPartNumbers(): number[] {
+    for (let i = 0; i < this.input.length; i++) {
+      const line = this.input[i];
+      const potentialMotorParts = this.getPotentialMotorParts(this.input[i]);
+      potentialMotorParts.forEach(pmp => {
+        const symbolsInline = this.isThereAnAdjacentSymbolInline(pmp, line);
+        const symbolsAbove = i > 0 ? this.isThereAnAdjacentSymbolAbove(pmp, i) : false;
+        const symbolsBlow = i < this.input.length - 1 ? this.isThereAnAdjacentSymbolBelow(pmp, i) : false;
+        if (symbolsInline || symbolsAbove || symbolsBlow) this.partNumbers.push(pmp.value);
+      });
+    }
+    return this.partNumbers;
   }
 };

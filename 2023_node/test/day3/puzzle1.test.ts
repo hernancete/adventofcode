@@ -63,6 +63,7 @@ const inputSampleParsed = [
     ]
   },
 ];
+const inputSamplePartNumbers = [467, 35, 633, 617, 592, 755, 664, 598];
 
 describe('Reading the input', () => {
 
@@ -153,5 +154,17 @@ describe('Looking for adjacent symbols', () => {
         expect(adjacentSymbolBelow).toBe(inputSampleParsed[i].potentialMotorParts[pmpIndx].below);
       }));
     }
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should get all the part numbers', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    puzzle1.getPartNumbers();
+
+    expect(puzzle1.partNumbers).toBeInstanceOf(Array);
+    expect(puzzle1.partNumbers).toHaveLength(inputSamplePartNumbers.length);
+    expect(puzzle1.partNumbers).toEqual(expect.arrayContaining(inputSamplePartNumbers));
   });
 });
