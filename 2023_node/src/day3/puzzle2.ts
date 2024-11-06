@@ -4,7 +4,6 @@ export interface gear {
   line: number,
   index: number,
   adjacents?: number[],
-  ratio?: number,
 };
 
 export class Puzzle2 extends Puzzle1 {
@@ -58,6 +57,7 @@ export class Puzzle2 extends Puzzle1 {
   }
 
   getGears(): gear[] {
+    this.gears.splice(0, this.gears.length);  // empty the gears array
     this.input.forEach((line, indx) => {
       const potentialGears = this.getPotentialGearsPerLine(indx);
       potentialGears.forEach(pg => {
@@ -77,5 +77,11 @@ export class Puzzle2 extends Puzzle1 {
       });
     });
     return this.gears;
+  }
+
+  solve(): number {
+    return this.gears.reduce((prev, curr) => {
+      return prev + (curr.adjacents?.reduce((p, c) => p * c, 1) || 0);
+    }, 0);
   }
 };

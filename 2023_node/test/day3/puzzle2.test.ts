@@ -9,6 +9,7 @@ const inputSamplePotentialGears = [
   { gear: { line: 4, index: 3 }, inline: [617], above: [], below: [] },
   { gear: { line: 8, index: 5 }, inline: [], above: [755], below: [598] },
 ];
+const answer = 467835;
 
 describe('Reading the input', () => {
 
@@ -89,5 +90,12 @@ describe('Solving the puzzle', () => {
       expect.objectContaining(inputSamplePotentialGears[0].gear),
       expect.objectContaining(inputSamplePotentialGears[2].gear),
     ]));
+  });
+
+  test('Should solve the puzzle', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    puzzle2.getGears();
+
+    expect(puzzle2.solve()).toBe(answer);
   });
 });
