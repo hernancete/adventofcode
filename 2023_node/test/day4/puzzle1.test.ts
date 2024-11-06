@@ -39,4 +39,15 @@ describe('Parsing cards', () => {
     }
   });
 
+  test('Should get card points', () => {
+
+    for (const iscl of inputSampleCardLines) {
+      const card = new Card(iscl.raw);
+      card.getWinningNumbers();
+      card.getNumbers();
+      const points = card.getPoints();
+
+      expect(points).toBe(iscl.points);
+    }
+  });
 });

@@ -6,6 +6,8 @@ interface cardParts {
   numbers: string,
 }
 
+const pointsTable = [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2046, 4092];
+
 export class Card {
   private _raw: string;
   private _parts: cardParts;
@@ -36,6 +38,12 @@ export class Card {
     return this.numbers;
   }
 
+  getPoints(): number {
+    const coincidences = this.numbers.reduce((prev, curr) => {
+      return prev + (this.winningNumbers.includes(curr) ? 1 : 0);
+    }, 0);
+    return pointsTable[coincidences];
+  }
 };
 
 export class Puzzle1 extends Puzzle { };
