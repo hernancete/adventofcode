@@ -7,17 +7,18 @@ interface cardParts {
 }
 
 export class Card {
-  private _cardLine: string;
+  private _raw: string;
   private _parts: cardParts;
   winningNumbers: number[] = [];
+  numbers: number[] = [];
 
-  constructor(cardLine: string) {
-    this._cardLine = cardLine;
-    this._parts = this.parseCardParts(this._cardLine);
+  constructor(raw: string) {
+    this._raw = raw;
+    this._parts = this.parseCardParts(this._raw);
   }
 
-  private parseCardParts(cardLine: string): cardParts {
-    const parts = cardLine.split(/[:\|]/).map(p => p.trim());
+  private parseCardParts(raw: string): cardParts {
+    const parts = raw.split(/[:\|]/).map(p => p.trim());
     return {
       card: parts[0],
       winning: parts[1],
@@ -26,9 +27,15 @@ export class Card {
   }
 
   getWinningNumbers(): number[] {
-    this.winningNumbers = this._parts.winning.split(' ').map(p => parseInt(p));
+    this.winningNumbers = this._parts.winning.split(/ +/).map(p => parseInt(p));
     return this.winningNumbers;
   }
+
+  getNumbers(): number[] {
+    this.numbers = this._parts.numbers.split(/ +/).map(p => parseInt(p));
+    return this.numbers;
+  }
+
 };
 
 export class Puzzle1 extends Puzzle { };

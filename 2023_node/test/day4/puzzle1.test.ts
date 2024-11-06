@@ -26,4 +26,17 @@ describe('Parsing cards', () => {
       expect(winning).toEqual(expect.arrayContaining(iscl.winning));
     }
   });
+
+  test('Should get my numbers', () => {
+
+    for (const iscl of inputSampleCardLines) {
+      const card = new Card(iscl.line);
+      const numbers = card.getNumbers();
+
+      expect(numbers).toBeInstanceOf(Array);
+      expect(numbers).toHaveLength(iscl.numbers.length);
+      expect(numbers).toEqual(expect.arrayContaining(iscl.numbers));
+    }
+  });
+
 });
