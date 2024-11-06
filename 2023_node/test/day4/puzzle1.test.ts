@@ -1,6 +1,7 @@
 import { describe, test, expect } from '@jest/globals';
 import { getAbsPath } from '../utils';
-import { Puzzle1, Card } from '../../src/day4/puzzle1';
+import { Card } from '../../src/day4/card';
+import { Puzzle1 } from '../../src/day4/puzzle1';
 
 const inputSample = './input.txt';
 const inputSampleCardLines = [
