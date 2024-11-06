@@ -8,9 +8,15 @@ npm test
 ```
 
 __Run one specific test__
-For example run  day 1, puzzle 2's tests
+
+For example run day 1, puzzle 2's tests
 ```bash
 npm test -- test/day1/puzzle2.test.ts
+```
+
+Or run all tests for day 3
+```bash
+npm test -- test/day3
 ```
 
 __Build__
@@ -19,6 +25,7 @@ npm run build
 ```
 
 __Run some day's puzzle__
+
 For example, run first day's puzzle 1.
 ```bash
 node dist/day1/runPuzzle1.js
