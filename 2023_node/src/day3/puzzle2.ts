@@ -3,13 +3,16 @@ import { Puzzle1 } from "./puzzle1";
 export interface gear {
   line: number,
   index: number,
+  adjacents?: number[],
+  ratio?: number,
 };
 
 export class Puzzle2 extends Puzzle1 {
 
   gearRegex = /\*/g;
+  gears: gear[] = [];
 
-  getPotentialGearsInline(lineIndex: number): Array<gear> {
+  getPotentialGearsPerLine(lineIndex: number): Array<gear> {
     const gears: gear[] = [];
     const matches = this.input[lineIndex].matchAll(this.gearRegex);
     [...matches].forEach(m => {
@@ -31,7 +34,7 @@ export class Puzzle2 extends Puzzle1 {
     return adjPartNumbers;
   }
 
-  getAdjacentPartNumbersOtherLine(gear: gear, line: string): number[] {
+  private getAdjacentPartNumbersOtherLine(gear: gear, line: string): number[] {
     const adjPartNumbers: number[] = [];
     const partNumbersOtherLine = this.getPotentialMotorParts(line);
     partNumbersOtherLine.forEach(pnol => {
@@ -52,5 +55,27 @@ export class Puzzle2 extends Puzzle1 {
   getAdjacentPartNumbersBelow(gear: gear): number[] {
     if (gear.line === this.input.length - 1) return [];
     return this.getAdjacentPartNumbersOtherLine(gear, this.input[gear.line + 1]);
+  }
+
+  getGears(): gear[] {
+    this.input.forEach((line, indx) => {
+      const potentialGears = this.getPotentialGearsPerLine(indx);
+      potentialGears.forEach(pg => {
+        const adjInline = this.getAdjacentPartNumbersInline(pg);
+        const adjAbove = this.getAdjacentPartNumbersAbove(pg);
+        const adjBelow = this.getAdjacentPartNumbersBelow(pg);
+        if (adjInline.length + adjAbove.length + adjBelow.length === 2) {
+          this.gears.push({
+            ...pg,
+            adjacents: [
+              ...adjInline,
+              ...adjAbove,
+              ...adjBelow
+            ]
+          });
+        }
+      });
+    });
+    return this.gears;
   }
 };

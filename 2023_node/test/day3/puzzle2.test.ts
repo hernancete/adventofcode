@@ -29,9 +29,9 @@ describe('Looking for gears', () => {
     const firstLineIndex = 0;
     const secondLineIndex = 1;
     const fifhtLineIndex = 4;
-    const firstLineGears = puzzle2.getPotentialGearsInline(firstLineIndex);
-    const secondLineGears = puzzle2.getPotentialGearsInline(secondLineIndex);
-    const fifthLineGears = puzzle2.getPotentialGearsInline(fifhtLineIndex);
+    const firstLineGears = puzzle2.getPotentialGearsPerLine(firstLineIndex);
+    const secondLineGears = puzzle2.getPotentialGearsPerLine(secondLineIndex);
+    const fifthLineGears = puzzle2.getPotentialGearsPerLine(fifhtLineIndex);
 
     expect(firstLineGears).toBeInstanceOf(Array);
     expect(firstLineGears).toHaveLength(0);
@@ -74,5 +74,20 @@ describe('Looking for gears', () => {
       expect(adjPartNumbInline).toHaveLength(pg.below.length);
       expect(adjPartNumbInline).toEqual(expect.arrayContaining(pg.below));
     }
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should get every gear, no potential ones', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    const gears = puzzle2.getGears();
+    expect(gears).toBeInstanceOf(Array);
+    expect(gears).toHaveLength(2);
+    expect(gears).toEqual(expect.arrayContaining([
+      expect.objectContaining(inputSamplePotentialGears[0].gear),
+      expect.objectContaining(inputSamplePotentialGears[2].gear),
+    ]));
   });
 });
