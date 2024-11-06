@@ -75,4 +75,8 @@ export class Puzzle1 {
     }
     return this.partNumbers;
   }
+
+  solve(): number {
+    return this.partNumbers.reduce((prev, curr) => prev + curr, 0);
+  }
 };

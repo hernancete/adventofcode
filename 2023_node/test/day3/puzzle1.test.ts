@@ -64,6 +64,7 @@ const inputSampleParsed = [
   },
 ];
 const inputSamplePartNumbers = [467, 35, 633, 617, 592, 755, 664, 598];
+const answer = 4361;
 
 describe('Reading the input', () => {
 
@@ -166,5 +167,12 @@ describe('Solving the puzzle', () => {
     expect(puzzle1.partNumbers).toBeInstanceOf(Array);
     expect(puzzle1.partNumbers).toHaveLength(inputSamplePartNumbers.length);
     expect(puzzle1.partNumbers).toEqual(expect.arrayContaining(inputSamplePartNumbers));
+  });
+
+  test('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    puzzle1.getPartNumbers();
+
+    expect(puzzle1.solve()).toBe(answer);
   });
 });
