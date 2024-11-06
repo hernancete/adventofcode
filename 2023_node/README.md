@@ -31,7 +31,6 @@ For example, run first day's puzzle 1.
 node dist/day1/runPuzzle1.js
 ```
 
-
 ### Puzzle's results
 
 | Day   | Puzzle 1 | Puzzle 2 |
@@ -39,7 +38,7 @@ node dist/day1/runPuzzle1.js
 | Day 1 | 56465    | 55902    |
 | Day 2 | 1867     | 84538    |
 | Day 3 | 509115   | 75220503 |
-| Day 4 |||
+| Day 4 | 21088    ||
 | Day 5 |||
 | Day 6 |||
 | Day 7 |||
