@@ -5,9 +5,9 @@ import { Puzzle2 } from '../../src/day3/puzzle2';
 const inputSample = './input.txt';
 const inputSampleThirdLine = '..35..633.';
 const inputSamplePotentialGears = [
-  { gear: { line: 1, index: 3 }, inline: [] },
-  { gear: { line: 4, index: 3 }, inline: [617] },
-  { gear: { line: 8, index: 5 }, inline: [] },
+  { gear: { line: 1, index: 3 }, inline: [], above: [467] },
+  { gear: { line: 4, index: 3 }, inline: [617], above: [] },
+  { gear: { line: 8, index: 5 }, inline: [], above: [755] },
 ];
 
 describe('Reading the input', () => {
@@ -51,6 +51,17 @@ describe('Looking for gears', () => {
       expect(adjPartNumbInline).toBeInstanceOf(Array);
       expect(adjPartNumbInline).toHaveLength(pg.inline.length);
       expect(adjPartNumbInline).toEqual(expect.arrayContaining(pg.inline));
+    }
+  });
+
+  test('Should get adjacent part numbers above', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    for (const pg of inputSamplePotentialGears) {
+      const adjPartNumbInline = puzzle2.getAdjacentPartNumbersAbove(pg.gear);
+      expect(adjPartNumbInline).toBeInstanceOf(Array);
+      expect(adjPartNumbInline).toHaveLength(pg.above.length);
+      expect(adjPartNumbInline).toEqual(expect.arrayContaining(pg.above));
     }
   });
 });

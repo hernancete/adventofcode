@@ -30,4 +30,18 @@ export class Puzzle2 extends Puzzle1 {
     });
     return adjPartNumbers;
   }
+
+  getAdjacentPartNumbersAbove(gear: gear): number[] {
+    const adjPartNumbers: number[] = [];
+    if (gear.line === 0) return adjPartNumbers;
+    const partNumbersAbove = this.getPotentialMotorParts(this.input[gear.line - 1]);
+    partNumbersAbove.forEach(pna => {
+      if (
+        (pna.startIndx! >= gear.index - 1 && pna.startIndx! <= gear.index + 1) ||
+        (pna.endIndx! >= gear.index - 1 && pna.endIndx! <= gear.index + 1)
+      )
+        adjPartNumbers.push(pna.value);
+    });
+    return adjPartNumbers;
+  }
 };
