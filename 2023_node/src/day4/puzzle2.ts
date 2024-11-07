@@ -25,4 +25,12 @@ export class Puzzle2 extends Puzzle1 {
       }
     });
   }
+
+  solve(): number {
+    let totalCards = this.cards.length;
+    Object.keys(this.cardsDups).forEach(cardName => {
+      totalCards += this.cardsDups[cardName];
+    });
+    return totalCards;
+  }
 };
