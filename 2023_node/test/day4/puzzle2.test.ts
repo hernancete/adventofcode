@@ -19,16 +19,16 @@ describe('Duplicating cards', () => {
     ]));
   });
 
-  // test.skip('Should duplicate the N following cards, where N is the coincidences amount', () => {
-  //   const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSamle));
-  //   puzzle2.loadCards();
-  //   puzzle2.duplicateCardsByCoincidence();
+  test('Should duplicate the N following cards, where N is the coincidences amount', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSamle));
+    puzzle2.loadCards();
+    puzzle2.duplicateCardsByCoincidence();
 
-  //   expect(puzzle2.cardsDups).not.toHaveProperty('Card 1');
-  //   expect(puzzle2.cardsDups).toHaveProperty('Card 2', 1);
-  //   expect(puzzle2.cardsDups).toHaveProperty('Card 3', 3);
-  //   expect(puzzle2.cardsDups).toHaveProperty('Card 4', 7);
-  //   expect(puzzle2.cardsDups).toHaveProperty('Card 5', 13);
-  //   expect(puzzle2.cardsDups).not.toHaveProperty('Card 6');
-  // });
+    expect(puzzle2.cardsDups).not.toHaveProperty('Card 1');
+    expect(puzzle2.cardsDups).toHaveProperty('Card 2', 1);
+    expect(puzzle2.cardsDups).toHaveProperty('Card 3', 3);
+    expect(puzzle2.cardsDups).toHaveProperty('Card 4', 7);
+    expect(puzzle2.cardsDups).toHaveProperty('Card 5', 13);
+    expect(puzzle2.cardsDups).not.toHaveProperty('Card 6');
+  });
 });
