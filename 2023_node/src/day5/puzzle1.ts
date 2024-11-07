@@ -11,7 +11,7 @@ export class Puzzle1 extends Puzzle {
     this._parseInput();
   }
 
-  private _parseInput() {
+  protected _parseInput() {
     let parsing: number = -1;
     for (const i of this.input) {
       // load seeds
@@ -26,7 +26,7 @@ export class Puzzle1 extends Puzzle {
     }
   }
 
-  private _parseSeeds(seedsLine: string): number[] {
+  protected _parseSeeds(seedsLine: string): number[] {
     return seedsLine.replace('seeds: ', '').split(/ +/).map(s => parseInt(s));
   }
 
