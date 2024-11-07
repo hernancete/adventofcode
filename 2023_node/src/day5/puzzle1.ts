@@ -16,7 +16,7 @@ export class Puzzle1 extends Puzzle {
     for (const i of this.input) {
       // load seeds
       if (i.startsWith('seeds')) {
-        this.seeds = i.replace('seeds: ', '').split(/ +/).map(s => parseInt(s));
+        this.seeds = this._parseSeeds(i);
       } else if (i.endsWith('map:')) {
         this.mappers.push(new Mapper);
         parsing = this.mappers.length - 1; // we are parsing the mapper[parsing]
@@ -24,6 +24,10 @@ export class Puzzle1 extends Puzzle {
         this.mappers[parsing].loadRange(i);
       }
     }
+  }
+
+  private _parseSeeds(seedsLine: string): number[] {
+    return seedsLine.replace('seeds: ', '').split(/ +/).map(s => parseInt(s));
   }
 
   map(seed: number): number {
