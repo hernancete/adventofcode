@@ -5,6 +5,12 @@ import { Puzzle1 } from '../../src/day5/puzzle1';
 const inputSample = './input.txt';
 const sampleSeed = 10; // 10 -> 10 -> 49 -> 38 -> 31 -> 31 -> 32 -> 32
 const sampleLocation = 32;
+const inputSampleSeedsAndLocations = [
+  { seed: 79, location: 82 },
+  { seed: 14, location: 43 },
+  { seed: 55, location: 86 },
+  { seed: 13, location: 35 },
+];
 const answer = 35;
 
 describe('Parsing the input', () => {
@@ -50,6 +56,14 @@ describe('Solving the puzzle', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
 
     expect(puzzle1.map(sampleSeed)).toBe(sampleLocation);
+  });
+
+  test('Should get the location for every input seed', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    for (const s of inputSampleSeedsAndLocations) {
+      expect(puzzle1.map(s.seed)).toBe(s.location);
+    }
   });
 
   test('Should solve the puzzle', () => {

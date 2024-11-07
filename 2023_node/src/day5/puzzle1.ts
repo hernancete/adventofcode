@@ -36,6 +36,6 @@ export class Puzzle1 extends Puzzle {
 
   solve(): number {
     // return this.seeds.reduce((prev, curr) => Math.min(prev, this.map(curr)), 1000000000);
-    return this.seeds.map(s => this.map(s)).sort().at(0) as number;
+    return this.seeds.map(s => this.map(s)).sort((a, b) => a - b).at(0) as number;
   }
 };
