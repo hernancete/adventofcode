@@ -9,12 +9,14 @@ const pointsTable = [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2046, 4092]
 export class Card {
   private _raw: string;
   private _parts: cardParts;
+  name: string;
   winningNumbers: number[] = [];
   numbers: number[] = [];
 
   constructor(raw: string) {
     this._raw = raw;
     this._parts = this.parseCardParts(this._raw);
+    this.name = this._parts.card;
   }
 
   private parseCardParts(raw: string): cardParts {
