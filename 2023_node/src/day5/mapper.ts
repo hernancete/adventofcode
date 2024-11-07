@@ -18,4 +18,9 @@ export class Mapper {
       destTo: destFrom + length - 1,
     });
   }
+
+  map(input: number): number {
+    const range = this.ranges.find(range => input >= range.sourceFrom && input <= range.sourceTo);
+    return range ? range.destFrom + input - range.sourceFrom : input;
+  }
 };
