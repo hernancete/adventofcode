@@ -20,6 +20,8 @@ export class Puzzle1 extends Puzzle {
       } else if (i.endsWith('map:')) {
         this.mappers.push(new Mapper);
         parsing = this.mappers.length - 1; // we are parsing the mapper[parsing]
+      } else if (i.length) {
+        this.mappers[parsing].loadRange(i);
       }
     }
   }

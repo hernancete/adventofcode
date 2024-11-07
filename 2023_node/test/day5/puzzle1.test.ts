@@ -20,4 +20,23 @@ describe('Parsing the input', () => {
     expect(puzzle1.mappers).toBeInstanceOf(Array);
     expect(puzzle1.mappers).toHaveLength(7);
   });
+
+  test('Should load the ranges in every mapper', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle1.mappers[0]).toHaveProperty('ranges');
+    expect(puzzle1.mappers[0].ranges).toHaveLength(2);
+    expect(puzzle1.mappers[1].ranges).toHaveLength(3);
+    expect(puzzle1.mappers[2].ranges).toHaveLength(4);
+    expect(puzzle1.mappers[3].ranges).toHaveLength(2);
+    expect(puzzle1.mappers[4].ranges).toHaveLength(3);
+    expect(puzzle1.mappers[5].ranges).toHaveLength(2);
+    expect(puzzle1.mappers[6].ranges).toHaveLength(2);
+    expect(puzzle1.mappers[6].ranges[0]).toEqual(expect.objectContaining({
+      sourceFrom: 56,
+      sourceTo: 92,
+      destFrom: 60,
+      destTo: 96,
+    }));
+  });
 });
