@@ -3,6 +3,8 @@ import { getAbsPath } from '../utils';
 import { Puzzle1 } from '../../src/day5/puzzle1';
 
 const inputSample = './input.txt';
+const sampleSeed = 10; // 10 -> 10 -> 49 -> 38 -> 31 -> 31 -> 32 -> 32
+const sampleLocation = 32;
 
 describe('Parsing the input', () => {
 
@@ -38,5 +40,14 @@ describe('Parsing the input', () => {
       destFrom: 60,
       destTo: 96,
     }));
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should pass a seed for every mapper and get the location info', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle1.map(sampleSeed)).toBe(sampleLocation);
   });
 });

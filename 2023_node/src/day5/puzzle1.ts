@@ -25,4 +25,12 @@ export class Puzzle1 extends Puzzle {
       }
     }
   }
+
+  map(seed: number): number {
+    let ret = seed;
+    for (const m of this.mappers) {
+      ret = m.map(ret);
+    }
+    return ret;
+  }
 };
