@@ -16,4 +16,13 @@ describe('Creating races', () => {
       expect(race.time).toBe(raceSample.time);
     }
   });
+
+  test('Should load record on races', () => {
+    for (const raceSample of raceSamples) {
+      const race = new Race(raceSample.time);
+      race.setRecord(raceSample.record);
+
+      expect(race.record).toBe(raceSample.record);
+    }
+  });
 });
