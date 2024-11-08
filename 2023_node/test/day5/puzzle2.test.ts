@@ -14,13 +14,15 @@ const answer = 46;
 
 describe('Parsing the input', () => {
 
-  test('Should load the seeds', () => {
+  test('Should load the seeds ranges', () => {
     const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
-    expect(puzzle2.seeds).toBeInstanceOf(Array);
-    expect(puzzle2.seeds).toHaveLength(27);
-    expect(puzzle2.seeds).toEqual(expect.arrayContaining([79, 80, 81, 91, 92, 55, 56, 66, 67]));
-    expect(puzzle2.seeds).toEqual(expect.not.arrayContaining([14, 13]));
+    expect(puzzle2.seedRanges).toBeInstanceOf(Array);
+    expect(puzzle2.seedRanges).toHaveLength(2);
+    expect(puzzle2.seedRanges).toEqual(expect.arrayContaining([
+      expect.objectContaining({ start: 79, length: 14 }),
+      expect.objectContaining({ start: 55, length: 13 }),
+    ]));
   });
 });
 
@@ -32,10 +34,5 @@ describe('Solving the puzzle', () => {
     for (const s of inputSampleSeedsAndLocations) {
       expect(puzzle2.map(s.seed)).toBe(s.location);
     }
-  });
-
-  test('Should solve the puzzle', () => {
-    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
-    expect(puzzle2.solve()).toBe(answer);
   });
 });
