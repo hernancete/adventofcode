@@ -35,4 +35,10 @@ describe('Solving the puzzle', () => {
       expect(puzzle2.map(s.seed)).toBe(s.location);
     }
   });
+
+  test('Should solve the puzzle', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle2.solve()).toBe(answer);
+  });
 });
