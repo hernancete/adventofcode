@@ -17,4 +17,8 @@ export class Puzzle2 extends Puzzle {
     race.setRecord(record);
     return race;
   }
+
+  solve(): number {
+    return this.race.calculateWinningOptions().length;
+  }
 };

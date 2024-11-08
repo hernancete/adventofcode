@@ -16,3 +16,12 @@ describe('Parseing the input', () => {
     }));
   });
 });
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle2.solve()).toBe(answer);
+  });
+});
