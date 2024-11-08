@@ -13,7 +13,6 @@ export class Puzzle2 extends Puzzle1 {
     for (let r = 0; r < this.seeds.length; r += 2) {
       this.seedRanges.push({ start: this.seeds[r], length: this.seeds[r + 1] });
     }
-    console.log(this.seedRanges);
   }
 
   solve(): number {
