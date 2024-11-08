@@ -26,3 +26,18 @@ describe('Creating races', () => {
     }
   });
 });
+
+describe('Calculating race options', () => {
+
+  test('Should calculate all the options to run the race beating the record', () => {
+    for (const raceSample of raceSamples) {
+      const race = new Race(raceSample.time);
+      race.setRecord(raceSample.record);
+      const winningOptions = race.calculateWinningOptions();
+
+      expect(winningOptions).toBeInstanceOf(Array);
+      expect(winningOptions).toHaveLength(raceSample.winningOptions.length);
+      expect(winningOptions).toEqual(expect.arrayContaining(raceSample.winningOptions));
+    }
+  });
+});
