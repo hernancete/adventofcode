@@ -24,6 +24,13 @@ const moreSampleHands = [
   { hand: 'AAKK8', type: 'TwoPair' },
   { hand: 'AA234', type: 'OnePair' },
   { hand: 'AKQJT', type: 'HighCard' },
+  { hand: '55555', type: 'FiveOfAKind' },
+  { hand: '99K99', type: 'FourOfAKind' },
+  { hand: '23232', type: 'FullHuse' },
+  { hand: '4JJ3J', type: 'ThreeOfAKind' },
+  { hand: '8QQA8', type: 'TwoPair' },
+  { hand: '796K6', type: 'OnePair' },
+  { hand: '9843Q', type: 'HighCard' },
 ];
 
 describe('Creating hand', () => {
