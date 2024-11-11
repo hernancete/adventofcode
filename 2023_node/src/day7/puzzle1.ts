@@ -38,4 +38,10 @@ export class Puzzle1 extends Puzzle {
     });
     // console.log('sorted', this.hands.map(h => h.hand));
   }
+
+  solve(): number {
+    return this.hands.reduce((prev, curr, currIndex) => {
+      return prev + (curr.bid * (currIndex + 1));
+    }, 0);
+  }
 };

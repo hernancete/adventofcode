@@ -12,6 +12,7 @@ const inputSampleOrdered = [
   'T55J5',
   'QQQJA',
 ];
+const answer = 6440;
 
 describe('Parsing the input', () => {
 
@@ -45,5 +46,12 @@ describe('Solving the puzzle', () => {
       const orderedHand = new Hand(inputSampleOrdered[h]);
       expect(puzzle1.hands[h].isEqual(orderedHand)).toBeTruthy();
     }
+  });
+
+  test('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    puzzle1.sortHands();
+
+    expect(puzzle1.solve()).toBe(answer);
   });
 });
