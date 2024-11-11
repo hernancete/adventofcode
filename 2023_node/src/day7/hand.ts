@@ -52,4 +52,12 @@ export class Hand {
   loadBid(bid: number) {
     this.bid = bid;
   }
+
+  sort(): string {
+    return this.hand.split('').sort((a, b) => cards.indexOf(b) - cards.indexOf(a)).join('');
+  }
+
+  isEqual(otherHand: Hand): boolean {
+    return this.sort() === otherHand.sort();
+  }
 };
