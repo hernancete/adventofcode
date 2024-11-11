@@ -12,7 +12,10 @@ export class Puzzle1 extends Puzzle {
 
   private _loadHands() {
     this.input.forEach(hl => {
-      this.hands.push(new Hand(hl.slice(0, 5)));
+      const hlParts = hl.split(/ +/);
+      const hand = new Hand(hlParts[0]);
+      hand.loadBid(parseInt(hlParts[1]));
+      this.hands.push(hand);
     });
   }
 };
