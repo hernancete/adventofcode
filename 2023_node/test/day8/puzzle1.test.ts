@@ -4,8 +4,10 @@ import { Puzzle1 } from '../../src/day8/puzzle1';
 
 const inputSample = './input.txt';
 const inputSampleLRPattern = ['R', 'L'];
+const inputSampleNextDirection = ['L', 'R'];
 const input2Sample = './input2.txt';
 const input2SampleLRPattern = ['L', 'L', 'R'];
+const input2SampleNextDirection = ['L', 'R', 'L'];
 const inputSampleNetwork = [
   { name: 'AAA', L: 'BBB', R: 'CCC' },
   { name: 'BBB', L: 'DDD', R: 'EEE' },
@@ -47,5 +49,20 @@ describe('Parsing the input', () => {
     for (const network of inputSampleNetwork) {
       expect(puzzle1.network).toHaveProperty(network.name, expect.objectContaining({ L: network.L, R: network.R }));
     }
+  });
+});
+
+describe('Walking the network', () => {
+
+  test('Should get the next direction given the current one', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    const otherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
+
+    inputSampleNextDirection.forEach((nextDirection, currentDirectionIndex) => {
+      expect(puzzle1.getNextDirection(currentDirectionIndex)).toBe(nextDirection);
+    });
+    input2SampleNextDirection.forEach((nextDirection, currentDirectionIndex) => {
+      expect(otherPuzzle1.getNextDirection(currentDirectionIndex)).toBe(nextDirection);
+    });
   });
 });

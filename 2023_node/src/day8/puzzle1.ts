@@ -18,4 +18,8 @@ export class Puzzle1 extends Puzzle {
       this.network[nameMatch[0]] = { L: lMatch[0], R: rMatch[0] };
     })
   }
+
+  getNextDirection(currentPatternIndex: number): string {
+    return this.pattern[(currentPatternIndex + 1) % this.pattern.length];
+  }
 };
