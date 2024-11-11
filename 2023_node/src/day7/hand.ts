@@ -6,7 +6,7 @@
 // OnePair:       AA234 (groups: 1)
 // HighCard:      AKQJT (groups: 0)
 
-const cards: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+export const cardsOrder: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
 export class Hand {
   hand: string = '';
@@ -19,7 +19,7 @@ export class Hand {
   }
 
   private _inferType() {
-    const orderedHand = this.hand.split('').sort((a, b) => cards.indexOf(b) - cards.indexOf(a));
+    const orderedHand = this.hand.split('').sort((a, b) => cardsOrder.indexOf(b) - cardsOrder.indexOf(a));
 
     const grouped: number[] = [];
     let group = 0;
@@ -54,7 +54,7 @@ export class Hand {
   }
 
   sort(): string {
-    return this.hand.split('').sort((a, b) => cards.indexOf(b) - cards.indexOf(a)).join('');
+    return this.hand.split('').sort((a, b) => cardsOrder.indexOf(b) - cardsOrder.indexOf(a)).join('');
   }
 
   isEqual(otherHand: Hand): boolean {
