@@ -17,6 +17,15 @@ const inputSampleNetwork = [
   { name: 'GGG', L: 'GGG', R: 'GGG' },
   { name: 'ZZZ', L: 'ZZZ', R: 'ZZZ' },
 ];
+const inputSampleNextNode = [
+  { current: 'AAA', nextDirection: 'L', nextNode: 'BBB' },
+  { current: 'BBB', nextDirection: 'R', nextNode: 'EEE' },
+  { current: 'BBB', nextDirection: 'L', nextNode: 'DDD' },
+  { current: 'CCC', nextDirection: 'R', nextNode: 'GGG' },
+  { current: 'EEE', nextDirection: 'L', nextNode: 'EEE' },
+  { current: 'GGG', nextDirection: 'R', nextNode: 'GGG' },
+  { current: 'ZZZ', nextDirection: 'R', nextNode: 'ZZZ' },
+];
 
 describe('Parsing the input', () => {
 
@@ -64,5 +73,13 @@ describe('Walking the network', () => {
     input2SampleNextDirection.forEach((nextDirection, currentDirectionIndex) => {
       expect(otherPuzzle1.getNextDirection(currentDirectionIndex)).toBe(nextDirection);
     });
+  });
+
+  test('Should get the next step given the current one and the next direction', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+
+    for (const n of inputSampleNextNode) {
+      expect(puzzle1.getNextNetworkNode(n.current, n.nextDirection)).toBe(n.nextNode);
+    }
   });
 });

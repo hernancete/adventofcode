@@ -22,4 +22,8 @@ export class Puzzle1 extends Puzzle {
   getNextDirection(currentPatternIndex: number): string {
     return this.pattern[(currentPatternIndex + 1) % this.pattern.length];
   }
+
+  getNextNetworkNode(currentNetworkNode: string, nextDirection: string): string {
+    return this.network[currentNetworkNode][nextDirection];
+  }
 };
