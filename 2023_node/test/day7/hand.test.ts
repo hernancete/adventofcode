@@ -50,4 +50,21 @@ describe('Creating hand', () => {
       expect(hand.type).toBe(h.type);
     }
   });
+
+  test('Should load the bid', () => {
+    for (const h of sampleHands) {
+      const hand = new Hand(h.hand);
+      hand.loadBid(h.bid);
+
+      expect(hand.bid).toBe(h.bid);
+    }
+  });
+
+  test('Should have a bid of 0 if no bid was loaded', () => {
+    for (const h of sampleHands) {
+      const hand = new Hand(h.hand);
+
+      expect(hand.bid).toBe(0);
+    }
+  });
 });

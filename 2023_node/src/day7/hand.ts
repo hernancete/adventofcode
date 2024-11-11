@@ -11,6 +11,7 @@ const cards: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 
 export class Hand {
   hand: string = '';
   type: string = '';
+  bid: number = 0;
 
   constructor(hand: string) {
     this.hand = hand;
@@ -46,5 +47,9 @@ export class Hand {
       case 2:
         this.type = grouped[0] === 3 ? 'FullHuse' : 'TwoPair';
     }
+  }
+
+  loadBid(bid: number) {
+    this.bid = bid;
   }
 };
