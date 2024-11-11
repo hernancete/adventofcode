@@ -24,17 +24,18 @@ export class Puzzle1 extends Puzzle {
   sortHands() {
     this.hands.sort((a, b) => {
       if (a.type !== b.type) {
-        return cardTypes.indexOf(b.type) - cardTypes.indexOf(a.type);
+        return cardTypes.indexOf(a.type) - cardTypes.indexOf(b.type);
       }
-      const sortedA = a.sort().split('');
-      const sortedB = b.sort().split('');
+      const sortedA = a.hand.split('');
+      const sortedB = b.hand.split('');
       let i = 0;
       let ret = 0;
       do {
-        ret = cardsOrder.indexOf(sortedB[i]) - cardsOrder.indexOf(sortedA[i]);
+        ret = cardsOrder.indexOf(sortedA[i]) - cardsOrder.indexOf(sortedB[i]);
         i++;
-      } while (ret !== 0 && i < sortedA.length);
+      } while (ret === 0 && i < sortedA.length);
       return ret;
     });
+    // console.log('sorted', this.hands.map(h => h.hand));
   }
 };

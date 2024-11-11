@@ -6,11 +6,11 @@ import { Hand } from '../../src/day7/hand';
 const inputSample = './input.txt';
 const inputSampleBids = [765, 684, 28, 220, 483];
 const inputSampleOrdered = [
-  'QQQJA',
-  'T55J5',
-  'KK677',
-  'KTJJT',
   '32T3K',
+  'KTJJT',
+  'KK677',
+  'T55J5',
+  'QQQJA',
 ];
 
 describe('Parsing the input', () => {
@@ -38,10 +38,9 @@ describe('Parsing the input', () => {
 
 describe('Solving the puzzle', () => {
 
-  test('Should order the hands by strength', () => {
+  test('Should order the hands by ascendant strength', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
     puzzle1.sortHands();
-
     for (const h in inputSampleOrdered) {
       const orderedHand = new Hand(inputSampleOrdered[h]);
       expect(puzzle1.hands[h].isEqual(orderedHand)).toBeTruthy();
