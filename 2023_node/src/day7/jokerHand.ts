@@ -63,4 +63,12 @@ export class JokerHand {
         this.type = grouped[0] === 3 ? 'FullHuse' : 'TwoPair';
     }
   }
+
+  sort(): string {
+    return this.hand.split('').sort((a, b) => cardsOrder.indexOf(b) - cardsOrder.indexOf(a)).join('');
+  }
+
+  isEqual(otherHand: JokerHand): boolean {
+    return this.sort() === otherHand.sort();
+  }
 };

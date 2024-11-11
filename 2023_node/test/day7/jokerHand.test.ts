@@ -72,3 +72,32 @@ describe('Creating joker hand', () => {
   });
 });
 
+describe('Operating with hands', () => {
+
+  test('Should sort the hand\'s cards descendingly', () => {
+    for (const h of sampleHands) {
+      const hand = new JokerHand(h.hand);
+
+      expect(hand.sort()).toBe(h.ordered);
+    }
+  });
+
+  test('Should know if two hands are the same, even in different order', () => {
+    const hand1 = new JokerHand('99K99');
+    const hand2 = new JokerHand('23232');
+    const hand3 = new JokerHand('4JJ3J');
+    const hand4 = new JokerHand('8QQA8');
+    const hand5 = new JokerHand('22332'); // same as hand2
+    const hand6 = new JokerHand('34JJJ'); // same as hand3
+    const hand7 = new JokerHand('23456');
+    const hand8 = new JokerHand('65432'); // same as hand7
+
+    expect(hand1.isEqual(hand2)).toBeFalsy();
+    expect(hand2.isEqual(hand1)).toBeFalsy();
+    expect(hand3.isEqual(hand4)).toBeFalsy();
+    expect(hand5.isEqual(hand2)).toBeTruthy();
+    expect(hand6.isEqual(hand3)).toBeTruthy();
+    expect(hand7.isEqual(hand8)).toBeTruthy();
+    expect(hand1.isEqual(hand1)).toBeTruthy();
+  });
+});
