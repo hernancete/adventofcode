@@ -21,6 +21,7 @@ export class Puzzle2 extends Puzzle1 {
     let step = 0;
     let currentPatternIndex = 0;
     let currentNodes = [...this.startingNodes];
+    console.log(currentNodes);
     do {
       currentNodes = currentNodes.map(node => {
         const direction = this.getDirection(currentPatternIndex);
@@ -29,6 +30,7 @@ export class Puzzle2 extends Puzzle1 {
       });
       currentPatternIndex++;
       step++;
+      if (step % 1000000 === 0) console.log(step);
     } while (!currentNodes.every(n => this.isEndingNode(n)));
     return step;
   }
