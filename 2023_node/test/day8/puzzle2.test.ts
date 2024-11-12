@@ -106,8 +106,9 @@ describe('Walking the network', () => {
 
 describe('Solving the puzzle', () => {
 
-  test.skip('Should solve the puzzle', () => {
+  test('Should solve the puzzle', () => {
     const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    puzzle1.loadStartingNodes();
 
     expect(puzzle1.solve()).toBe(answer);
   });

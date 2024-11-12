@@ -16,4 +16,20 @@ export class Puzzle2 extends Puzzle1 {
   isEndingNode(node: string): boolean {
     return this.endingNodesRegex.test(node);
   }
+
+  solve(): number {
+    let step = 0;
+    let currentPatternIndex = 0;
+    let currentNodes = [...this.startingNodes];
+    do {
+      currentNodes = currentNodes.map(node => {
+        const direction = this.getDirection(currentPatternIndex);
+        const nextNetworkNode = this.getNextNetworkNode(node, direction);
+        return nextNetworkNode;
+      });
+      currentPatternIndex++;
+      step++;
+    } while (!currentNodes.every(n => this.isEndingNode(n)));
+    return step;
+  }
 };
