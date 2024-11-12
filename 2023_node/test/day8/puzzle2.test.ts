@@ -41,29 +41,29 @@ const answer = 6;
 describe('Parsing the input', () => {
 
   test('Should get the left-right pattern', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
-    expect(puzzle1.pattern).toBeInstanceOf(Array);
-    expect(puzzle1.pattern).toHaveLength(2);
-    expect(puzzle1.pattern).toEqual(expect.arrayContaining(inputSampleLRPattern));
+    expect(puzzle2.pattern).toBeInstanceOf(Array);
+    expect(puzzle2.pattern).toHaveLength(2);
+    expect(puzzle2.pattern).toEqual(expect.arrayContaining(inputSampleLRPattern));
   });
 
   test('Should parse the network nodes', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
-    expect(puzzle1.network).toBeInstanceOf(Object);
-    expect(Object.keys(puzzle1.network)).toHaveLength(8);
-    expect(puzzle1.network).toHaveProperty('11A');
-    expect(puzzle1.network).toHaveProperty('11Z');
-    expect(puzzle1.network).toHaveProperty('22B');
-    expect(puzzle1.network).toHaveProperty('22Z');
+    expect(puzzle2.network).toBeInstanceOf(Object);
+    expect(Object.keys(puzzle2.network)).toHaveLength(8);
+    expect(puzzle2.network).toHaveProperty('11A');
+    expect(puzzle2.network).toHaveProperty('11Z');
+    expect(puzzle2.network).toHaveProperty('22B');
+    expect(puzzle2.network).toHaveProperty('22Z');
   });
 
   test('Should parse the network nodes and set its left and right paths', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
     for (const network of inputSampleNetwork) {
-      expect(puzzle1.network).toHaveProperty(network.name, expect.objectContaining({ L: network.L, R: network.R }));
+      expect(puzzle2.network).toHaveProperty(network.name, expect.objectContaining({ L: network.L, R: network.R }));
     }
   });
 });
@@ -71,35 +71,35 @@ describe('Parsing the input', () => {
 describe('Walking the network', () => {
 
   test('Should get the next direction given the current one', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
     inputSampleDirection.forEach((direction, directionIndex) => {
-      expect(puzzle1.getDirection(directionIndex)).toBe(direction);
+      expect(puzzle2.getDirection(directionIndex)).toBe(direction);
     });
   });
 
   test('Should get the next step given the current one and the next direction', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
     for (const n of inputSampleNextNode) {
-      expect(puzzle1.getNextNetworkNode(n.current, n.nextDirection)).toBe(n.nextNode);
+      expect(puzzle2.getNextNetworkNode(n.current, n.nextDirection)).toBe(n.nextNode);
     }
   });
 
   test('Should get the starting nodes', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
-    puzzle1.loadStartingNodes();
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    puzzle2.loadStartingNodes();
 
-    expect(puzzle1.startingNodes).toBeInstanceOf(Array);
-    expect(puzzle1.startingNodes).toHaveLength(2);
-    expect(puzzle1.startingNodes).toEqual(expect.arrayContaining(inputSampleStartingNodes));
+    expect(puzzle2.startingNodes).toBeInstanceOf(Array);
+    expect(puzzle2.startingNodes).toHaveLength(2);
+    expect(puzzle2.startingNodes).toEqual(expect.arrayContaining(inputSampleStartingNodes));
   });
 
   test('Should check if a node is an ending node', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
 
     for (const en of inputSampleEndingNodes) {
-      expect(puzzle1.isEndingNode(en.name)).toBe(en.endingNode);
+      expect(puzzle2.isEndingNode(en.name)).toBe(en.endingNode);
     }
   });
 });
@@ -107,9 +107,9 @@ describe('Walking the network', () => {
 describe('Solving the puzzle', () => {
 
   test('Should solve the puzzle', () => {
-    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
-    puzzle1.loadStartingNodes();
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    puzzle2.loadStartingNodes();
 
-    expect(puzzle1.solve()).toBe(answer);
+    expect(puzzle2.solve()).toBe(answer);
   });
 });
