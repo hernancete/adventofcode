@@ -1,5 +1,11 @@
 import { Puzzle } from "../shared/puzzle";
 
+interface WalkProps {
+  currentNode: string,
+  currentPatternIndex: number,
+  steps: number,
+};
+
 export class Puzzle1 extends Puzzle {
 
   pattern: string[] = [];
@@ -7,6 +13,7 @@ export class Puzzle1 extends Puzzle {
 
   startNode: string = 'AAA';
   endNode: string = 'ZZZ';
+  walkSegmentMaxSteps: number = 100;
 
   constructor(inputFile: string) {
     super(inputFile);
@@ -30,14 +37,31 @@ export class Puzzle1 extends Puzzle {
     return this.network[currentNetworkNode][nextDirection];
   }
 
-  walk(currentNode: string, currentPatternIndex: number = 0, steps: number = 0): number {
-    if (currentNode === this.endNode) return steps;
+  walk(currentNode: string, currentPatternIndex: number = 0, steps: number = 0): WalkProps {
+    if (currentNode === this.endNode || steps >= this.walkSegmentMaxSteps)
+      return { currentNode, currentPatternIndex, steps } as WalkProps;
     const direction = this.getDirection(currentPatternIndex);
     const nextNetworkNode = this.getNextNetworkNode(currentNode, direction);
     return this.walk(nextNetworkNode, currentPatternIndex + 1, steps + 1);
   }
 
   solve(): number {
-    return this.walk(this.startNode);
+    let steps = 0;
+    let finished = false;
+    let walkProps = {
+      currentNode: this.startNode,
+      currentPatternIndex: 0,
+      steps: 0,
+    } as WalkProps;
+
+    do {
+      // console.log('Before', walkProps);
+      walkProps = this.walk(walkProps.currentNode, walkProps.currentPatternIndex, 0);
+      steps += walkProps.steps;
+      finished = walkProps.currentNode === this.endNode;
+      // console.log('After', walkProps);
+    } while (!finished);
+
+    return steps;
   }
 };
