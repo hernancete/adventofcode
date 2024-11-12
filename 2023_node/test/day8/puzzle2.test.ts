@@ -75,4 +75,22 @@ describe('Walking the network', () => {
       expect(puzzle1.getNextNetworkNode(n.current, n.nextDirection)).toBe(n.nextNode);
     }
   });
+
+  test('Should get the starting nodes', () => {
+    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+    puzzle1.loadStartingNodes();
+
+    expect(puzzle1.startingNodes).toBeInstanceOf(Array);
+    expect(puzzle1.startingNodes).toHaveLength(2);
+    expect(puzzle1.startingNodes).toEqual(expect.arrayContaining(inputSampleStartingPoints));
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test.skip('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle1.solve()).toBe(answer);
+  });
 });
