@@ -4,10 +4,10 @@ import { Puzzle1 } from '../../src/day8/puzzle1';
 
 const inputSample = './input.txt';
 const inputSampleLRPattern = ['R', 'L'];
-const inputSampleNextDirection = ['L', 'R'];
+const inputSampleDirection = ['R', 'L'];
 const input2Sample = './input2.txt';
 const input2SampleLRPattern = ['L', 'L', 'R'];
-const input2SampleNextDirection = ['L', 'R', 'L'];
+const input2SampleDirection = ['L', 'L', 'R'];
 const inputSampleNetwork = [
   { name: 'AAA', L: 'BBB', R: 'CCC' },
   { name: 'BBB', L: 'DDD', R: 'EEE' },
@@ -26,6 +26,8 @@ const inputSampleNextNode = [
   { current: 'GGG', nextDirection: 'R', nextNode: 'GGG' },
   { current: 'ZZZ', nextDirection: 'R', nextNode: 'ZZZ' },
 ];
+const answer = 2;
+const answer2 = 6;
 
 describe('Parsing the input', () => {
 
@@ -67,11 +69,11 @@ describe('Walking the network', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
     const otherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
 
-    inputSampleNextDirection.forEach((nextDirection, currentDirectionIndex) => {
-      expect(puzzle1.getNextDirection(currentDirectionIndex)).toBe(nextDirection);
+    inputSampleDirection.forEach((direction, directionIndex) => {
+      expect(puzzle1.getDirection(directionIndex)).toBe(direction);
     });
-    input2SampleNextDirection.forEach((nextDirection, currentDirectionIndex) => {
-      expect(otherPuzzle1.getNextDirection(currentDirectionIndex)).toBe(nextDirection);
+    input2SampleDirection.forEach((direction, directionIndex) => {
+      expect(otherPuzzle1.getDirection(directionIndex)).toBe(direction);
     });
   });
 
@@ -81,5 +83,16 @@ describe('Walking the network', () => {
     for (const n of inputSampleNextNode) {
       expect(puzzle1.getNextNetworkNode(n.current, n.nextDirection)).toBe(n.nextNode);
     }
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    const otherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
+
+    expect(puzzle1.solve()).toBe(answer);
+    expect(otherPuzzle1.solve()).toBe(answer2);
   });
 });

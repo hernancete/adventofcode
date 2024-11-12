@@ -5,6 +5,9 @@ export class Puzzle1 extends Puzzle {
   pattern: string[] = [];
   network: any = {};
 
+  startNode: string = 'AAA';
+  endNode: string = 'ZZZ';
+
   constructor(inputFile: string) {
     super(inputFile);
     this.pattern = this.input[0].split('');
@@ -19,11 +22,22 @@ export class Puzzle1 extends Puzzle {
     })
   }
 
-  getNextDirection(currentPatternIndex: number): string {
-    return this.pattern[(currentPatternIndex + 1) % this.pattern.length];
+  getDirection(currentPatternIndex: number): string {
+    return this.pattern[currentPatternIndex % this.pattern.length];
   }
 
   getNextNetworkNode(currentNetworkNode: string, nextDirection: string): string {
     return this.network[currentNetworkNode][nextDirection];
+  }
+
+  walk(currentNode: string, currentPatternIndex: number = 0, steps: number = 0): number {
+    if (currentNode === this.endNode) return steps;
+    const direction = this.getDirection(currentPatternIndex);
+    const nextNetworkNode = this.getNextNetworkNode(currentNode, direction);
+    return this.walk(nextNetworkNode, currentPatternIndex + 1, steps + 1);
+  }
+
+  solve(): number {
+    return this.walk(this.startNode);
   }
 };
