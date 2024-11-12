@@ -25,7 +25,17 @@ const inputSampleNextNode = [
   { current: '22Z', nextDirection: 'L', nextNode: '22B' },
   { current: 'XXX', nextDirection: 'R', nextNode: 'XXX' },
 ];
-const inputSampleStartingPoints = ['11A', '22A'];
+const inputSampleStartingNodes = ['11A', '22A'];
+const inputSampleEndingNodes = [
+  { name: '11A', endingNode: false },
+  { name: '11B', endingNode: false },
+  { name: '11Z', endingNode: true },
+  { name: '22A', endingNode: false },
+  { name: '22B', endingNode: false },
+  { name: '22C', endingNode: false },
+  { name: '22Z', endingNode: true },
+  { name: 'XXX', endingNode: false },
+];
 const answer = 6;
 
 describe('Parsing the input', () => {
@@ -82,7 +92,15 @@ describe('Walking the network', () => {
 
     expect(puzzle1.startingNodes).toBeInstanceOf(Array);
     expect(puzzle1.startingNodes).toHaveLength(2);
-    expect(puzzle1.startingNodes).toEqual(expect.arrayContaining(inputSampleStartingPoints));
+    expect(puzzle1.startingNodes).toEqual(expect.arrayContaining(inputSampleStartingNodes));
+  });
+
+  test('Should check if a node is an ending node', () => {
+    const puzzle1 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    for (const en of inputSampleEndingNodes) {
+      expect(puzzle1.isEndingNode(en.name)).toBe(en.endingNode);
+    }
   });
 });
 
