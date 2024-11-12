@@ -24,7 +24,8 @@ export class Puzzle1 extends Puzzle {
   private _parseNetwork() {
     this.input.slice(1).forEach(i => {
       // AAA = (BBB, CCC)
-      const [nameMatch, lMatch, rMatch] = [...i.matchAll(/([A-Z]{3})/g)];
+      // 123 = (456, A7Z)
+      const [nameMatch, lMatch, rMatch] = [...i.matchAll(/([A-Z0-9]{3})/g)];
       this.network[nameMatch[0]] = { L: lMatch[0], R: rMatch[0] };
     })
   }
