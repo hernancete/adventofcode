@@ -42,7 +42,7 @@ node dist/day1/runPuzzle1.js
 | Day 5 | 825516882 | 136096660 |
 | Day 6 | 1159152  | 41513103 |
 | Day 7 | 248179786 | 247885995 |
-| Day 8 | 22199 ||
+| Day 8 | 22199 | 13334102464297 [^1] |
 | Day 9 |||
 | Day 10 |||
 | Day 11 |||
@@ -60,3 +60,6 @@ node dist/day1/runPuzzle1.js
 | Day 23 |||
 | Day 24 |||
 | Day 25 |||
+
+
+[^1]: Using the puzzle2.approach2.ts script. The puzzle2.ts it's been running for more than 5 hours and it's in the 0.5% of the total walk.
