@@ -1,9 +1,9 @@
 mkdir -p dist/day1/
-cp src/day1/input.txt dist/day1/
-cp src/day2/input.txt dist/day2/
-cp src/day3/input.txt dist/day3/
-cp src/day4/input.txt dist/day4/
-cp src/day5/input.txt dist/day5/
-cp src/day6/input.txt dist/day6/
-cp src/day7/input.txt dist/day7/
-cp src/day8/input.txt dist/day8/
+cp src/day01/input.txt dist/day01/
+cp src/day02/input.txt dist/day02/
+cp src/day03/input.txt dist/day03/
+cp src/day04/input.txt dist/day04/
+cp src/day05/input.txt dist/day05/
+cp src/day06/input.txt dist/day06/
+cp src/day07/input.txt dist/day07/
+cp src/day08/input.txt dist/day08/
