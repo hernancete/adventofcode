@@ -3,7 +3,7 @@ import { getAbsPath } from '../utils';
 import { Puzzle2 } from '../../src/day09/puzzle2';
 
 const inputSample = './input.txt';
-const answer = 114;
+const answer = 2;
 
 describe('Parsing the input', () => {
 
@@ -72,5 +72,14 @@ describe('Forecasting the next history value', () => {
     expect(backwardForecast0).toBe(-3);
     expect(backwardForecast1).toBe(0);
     expect(backwardForecast2).toBe(5);
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle2 = new Puzzle2(getAbsPath(__dirname, inputSample));
+
+    expect(puzzle2.solve()).toBe(answer);
   });
 });

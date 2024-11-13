@@ -17,4 +17,11 @@ export class Puzzle2 extends Puzzle1 {
   getBackwardForecastValue(historyIndex: number): number {
     return this.history[historyIndex].at(0)! - this.historyDiffsFirstDigits[historyIndex].reverse().reduce((prev, curr) => curr - prev, 0);
   }
+
+  solve(): number {
+    return this.history.reduce((prev, curr, index) => {
+      this.getTheDiffBetweenTheFirstTwoValuesOfEachDiffSequence(index);
+      return prev + this.getBackwardForecastValue(index);
+    }, 0);
+  }
 };
