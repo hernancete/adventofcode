@@ -58,4 +58,18 @@ describe('Forecasting the next history value', () => {
     expect(puzzle1.historyDiffsLastDigits[1]).toEqual(expect.arrayContaining([6, 1]));
     expect(puzzle1.historyDiffsLastDigits[2]).toEqual(expect.arrayContaining([15, 6, 2]));
   });
+
+  test('Should get the forecast for every history', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    puzzle1.getTheDiffBetweenTheLastTwoValuesOfEachDiffSequence(0);
+    const forecast0: number = puzzle1.getForecastValue(0);
+    puzzle1.getTheDiffBetweenTheLastTwoValuesOfEachDiffSequence(1);
+    const forecast1: number = puzzle1.getForecastValue(1);
+    puzzle1.getTheDiffBetweenTheLastTwoValuesOfEachDiffSequence(2);
+    const forecast2: number = puzzle1.getForecastValue(2);
+
+    expect(forecast0).toBe(18);
+    expect(forecast1).toBe(28);
+    expect(forecast2).toBe(68);
+  });
 });

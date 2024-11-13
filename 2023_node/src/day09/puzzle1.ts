@@ -38,4 +38,8 @@ export class Puzzle1 extends Puzzle {
       this.historyDiffsLastDigits[historyIndex].push(diffs.at(-1)!);
     }
   }
+
+  getForecastValue(historyIndex: number): number {
+    return this.history[historyIndex].at(-1)! + this.historyDiffsLastDigits[historyIndex].reduce((prev, curr) => prev + curr, 0);
+  }
 };
