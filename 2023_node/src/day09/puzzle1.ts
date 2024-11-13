@@ -42,4 +42,11 @@ export class Puzzle1 extends Puzzle {
   getForecastValue(historyIndex: number): number {
     return this.history[historyIndex].at(-1)! + this.historyDiffsLastDigits[historyIndex].reduce((prev, curr) => prev + curr, 0);
   }
+
+  solve(): number {
+    return this.history.reduce((prev, curr, index) => {
+      this.getTheDiffBetweenTheLastTwoValuesOfEachDiffSequence(index);
+      return prev + this.getForecastValue(index);
+    }, 0);
+  }
 };
