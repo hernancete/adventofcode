@@ -11,24 +11,18 @@ interface Connections {
   W: boolean,
 }
 
-// interface Location {
-//   lat: number, // row
-//   lon: number, // col
-// }
+interface Location {
+  lat: number, // row
+  lon: number, // col
+}
 
 export class PipeTile {
 
   tile: string;
   connectedTo: Connections;
-  location: number[] = [];
-  // location: Location;
+  location: Location;
 
-  // constructor(tile: string, location: Location = { lat: 0, lon: 0 }) {
-  //   this.tile = tile;
-  //   this.connectedTo = this.calculateConnections();
-  //   this.location = location;
-  // }
-  constructor(tile: string, location = [0, 0]) {
+  constructor(tile: string, location: Location = { lat: 0, lon: 0 }) {
     this.tile = tile;
     this.connectedTo = this.calculateConnections();
     this.location = location;
