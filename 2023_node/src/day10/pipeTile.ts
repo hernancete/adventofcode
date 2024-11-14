@@ -18,7 +18,7 @@ interface Connections {
   W: boolean,
 };
 
-interface Location {
+export interface Location {
   lat: number, // row
   lon: number, // col
 };

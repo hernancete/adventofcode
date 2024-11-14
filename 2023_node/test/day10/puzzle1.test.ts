@@ -7,19 +7,19 @@ const input2Sample = './input2.txt';
 
 describe('Parsing the input', () => {
 
-  test('Should find the starting point', () => {
+  test('Should find the starting point location', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
     const anotherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
 
-    expect(puzzle1.startingPoint).toEqual(expect.arrayContaining([1, 1]));
-    expect(anotherPuzzle1.startingPoint).toEqual(expect.arrayContaining([2, 0]));
+    expect(puzzle1.startingPointLocation).toEqual({ lat: 1, lon: 1 });
+    expect(anotherPuzzle1.startingPointLocation).toEqual({ lat: 2, lon: 0 });
   });
 
-  test('Should get the starting point pipe tile type', () => {
+  test('Should get the starting point type', () => {
     const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
     const anotherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
 
-    expect(puzzle1.getStartingPointType()).toBe('F');
-    expect(anotherPuzzle1.getStartingPointType()).toBe('F');
+    expect(puzzle1.startingPointType).toBe('F');
+    expect(anotherPuzzle1.startingPointType).toBe('F');
   });
 });
