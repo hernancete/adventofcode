@@ -93,4 +93,9 @@ export class Puzzle1 extends Puzzle {
 
     return this.path;
   }
+
+  solve(): number {
+    this.traceWalk();
+    return Math.floor(this.path.length / 2);
+  }
 };

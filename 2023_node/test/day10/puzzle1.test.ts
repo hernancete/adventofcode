@@ -32,6 +32,8 @@ const input2SamplePath = [
   { lat: 4, lon: 0 },
   { lat: 3, lon: 0 },
 ];
+const answer1 = 4;
+const answer2 = 8;
 
 describe('Parsing the input', () => {
 
@@ -82,5 +84,16 @@ describe('Walking the pipe', () => {
 
     expect(puzzle1.traceWalk()).toEqual(inputSamplePath);
     expect(anotherPuzzle1.traceWalk()).toEqual(input2SamplePath);
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    const anotherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
+
+    expect(puzzle1.solve()).toEqual(answer1);
+    expect(anotherPuzzle1.solve()).toEqual(answer2);
   });
 });
