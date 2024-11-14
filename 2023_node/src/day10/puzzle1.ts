@@ -2,7 +2,8 @@ import { Puzzle } from "../shared/puzzle";
 
 export class Puzzle1 extends Puzzle {
 
-  startingPoint: number[] = [];
+  startingPoint: number[] = []; // [row, col]
+  startingPointType: string = '';
 
   constructor(inputFile: string) {
     super(inputFile);
@@ -18,5 +19,24 @@ export class Puzzle1 extends Puzzle {
         break;
       }
     }
+  }
+
+  getStartingPointType(): string {
+    const northConnections = ['|', '7', 'F'];
+    const southConnections = ['|', 'J', 'L'];
+    const weastConnections = ['-', 'L', 'F'];
+    const eastConnections = ['-', 'J', '7'];
+    const connectedToNorth = this.startingPoint[0] > 0 && northConnections.includes(this.input[this.startingPoint[0] - 1].at(this.startingPoint[1])!);
+    const connectedToSouth = this.startingPoint[0] < this.input.length - 1 && southConnections.includes(this.input[this.startingPoint[0] + 1].at(this.startingPoint[1])!);
+    const connectedToWeast = this.startingPoint[1] > 0 && weastConnections.includes(this.input[this.startingPoint[0]].at(this.startingPoint[1] - 1)!);
+    const connectedToEast = this.startingPoint[1] < this.input[0].length && eastConnections.includes(this.input[this.startingPoint[0]].at(this.startingPoint[1] + 1)!);
+
+    if (connectedToNorth && connectedToSouth) this.startingPointType = '|';
+    else if (connectedToEast && connectedToWeast) this.startingPointType = '-';
+    else if (connectedToNorth && connectedToWeast) this.startingPointType = 'J';
+    else if (connectedToNorth && connectedToEast) this.startingPointType = 'L';
+    else if (connectedToSouth && connectedToWeast) this.startingPointType = '7';
+    else if (connectedToSouth && connectedToEast) this.startingPointType = 'F';
+    return this.startingPointType;
   }
 };

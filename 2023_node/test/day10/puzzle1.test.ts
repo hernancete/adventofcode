@@ -13,5 +13,13 @@ describe('Parsing the input', () => {
 
     expect(puzzle1.startingPoint).toEqual(expect.arrayContaining([1, 1]));
     expect(anotherPuzzle1.startingPoint).toEqual(expect.arrayContaining([2, 0]));
-  })
+  });
+
+  test('Should get the starting point pipe tile type', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    const anotherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
+
+    expect(puzzle1.getStartingPointType()).toBe('F');
+    expect(anotherPuzzle1.getStartingPointType()).toBe('F');
+  });
 });
