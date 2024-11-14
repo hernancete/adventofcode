@@ -1,5 +1,5 @@
 import { describe, test, expect } from '@jest/globals';
-import { PipeTile } from '../../src/day10/pipeTile';
+import { PipeTile, Directions } from '../../src/day10/pipeTile';
 
 const tiles = [
   { tile: '|', connectedTo: { N: true, S: true, E: false, W: false } },
@@ -8,6 +8,14 @@ const tiles = [
   { tile: 'F', connectedTo: { N: false, S: true, E: true, W: false } },
   { tile: 'J', connectedTo: { N: true, S: false, E: false, W: true } },
   { tile: 'L', connectedTo: { N: true, S: false, E: true, W: false } },
+];
+const walks = [
+  { tile: '|', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'N', lat: 2, lon: 1 }, { from: 'S', lat: 0, lon: 1 }] },
+  { tile: '-', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'W', lat: 1, lon: 2 }, { from: 'E', lat: 1, lon: 0 }] },
+  { tile: '7', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'W', lat: 2, lon: 1 }, { from: 'S', lat: 1, lon: 0 }] },
+  { tile: 'F', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'S', lat: 1, lon: 2 }, { from: 'E', lat: 2, lon: 1 }] },
+  { tile: 'J', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'N', lat: 1, lon: 0 }, { from: 'W', lat: 0, lon: 1 }] },
+  { tile: 'L', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'N', lat: 1, lon: 2 }, { from: 'E', lat: 0, lon: 1 }] },
 ];
 
 describe('Setting up a tile', () => {
@@ -42,5 +50,17 @@ describe('Setting up a tile', () => {
     expect(tile1.location).toEqual({ lat: 1, lon: 2 });
     expect(tile2.location).toEqual({ lat: 3, lon: 4 });
     expect(tile3.location).toEqual({ lat: 2, lon: 1 });
+  });
+});
+
+describe('Going through the pipe tile', () => {
+
+  test('Should get the next tile location when going through the pipe tile', () => {
+    for (const t of walks) {
+      const tile = new PipeTile(t.tile, t.location);
+      t.nextTileLocation.forEach(nextTileLoc => {
+        expect(tile.walkTheTile(nextTileLoc.from as Directions)).toEqual({ lat: nextTileLoc.lat, lon: nextTileLoc.lon });
+      })
+    }
   });
 });
