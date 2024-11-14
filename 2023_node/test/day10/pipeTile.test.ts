@@ -25,4 +25,22 @@ describe('Setting up a tile', () => {
       expect(tile.connectedTo).toEqual(t.connectedTo);
     }
   });
+
+  test('Should set the default location if not provided', () => {
+    const tile = new PipeTile('L');
+
+    expect(tile.location).toEqual([0, 0]);
+  });
+
+  test('Should set the location', () => {
+    const tile0 = new PipeTile('L', [0, 0]);
+    const tile1 = new PipeTile('L', [1, 2]);
+    const tile2 = new PipeTile('F', [3, 4]);
+    const tile3 = new PipeTile('F', [2, 1]);
+
+    expect(tile0.location).toEqual([0, 0]);
+    expect(tile1.location).toEqual([1, 2]);
+    expect(tile2.location).toEqual([3, 4]);
+    expect(tile3.location).toEqual([2, 1]);
+  });
 });
