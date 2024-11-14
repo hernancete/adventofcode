@@ -1,5 +1,5 @@
 import { Puzzle } from "../shared/puzzle";
-import { PipeTile, Location } from "./pipeTile";
+import { PipeTile, Location, Directions } from "./pipeTile";
 
 export class Puzzle1 extends Puzzle {
 
@@ -48,5 +48,12 @@ export class Puzzle1 extends Puzzle {
 
   protected _getStartingTile(): PipeTile {
     return new PipeTile(this.startingPointType, this.startingPointLocation);
+  }
+
+  chooseStartingDirection(): Directions {
+    if (this.startingTile.connectedTo.N) return Directions.N;
+    if (this.startingTile.connectedTo.S) return Directions.S;
+    if (this.startingTile.connectedTo.E) return Directions.E;
+    else return Directions.W;
   }
 };

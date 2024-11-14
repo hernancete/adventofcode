@@ -35,3 +35,16 @@ describe('Parsing the input', () => {
     );
   });
 });
+
+describe('Walking the pipe', () => {
+
+  test('Should choose some way to start walking', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    const anotherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
+    const startWalkingTowards1 = puzzle1.chooseStartingDirection();
+    const startWalkingTowards2 = anotherPuzzle1.chooseStartingDirection();
+
+    expect(['E', 'S'].includes(startWalkingTowards1)).toBe(true);
+    expect(['E', 'S'].includes(startWalkingTowards2)).toBe(true);
+  });
+});
