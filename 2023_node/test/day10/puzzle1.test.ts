@@ -22,4 +22,16 @@ describe('Parsing the input', () => {
     expect(puzzle1.startingPointType).toBe('F');
     expect(anotherPuzzle1.startingPointType).toBe('F');
   });
+
+  test('Should set the starting tile', () => {
+    const puzzle1 = new Puzzle1(getAbsPath(__dirname, inputSample));
+    const anotherPuzzle1 = new Puzzle1(getAbsPath(__dirname, input2Sample));
+
+    expect(puzzle1.startingTile).toEqual(
+      expect.objectContaining({ tile: 'F', location: { lat: 1, lon: 1 }, connectedTo: { N: false, S: true, E: true, W: false } })
+    );
+    expect(anotherPuzzle1.startingTile).toEqual(
+      expect.objectContaining({ tile: 'F', location: { lat: 2, lon: 0 }, connectedTo: { N: false, S: true, E: true, W: false } })
+    );
+  });
 });

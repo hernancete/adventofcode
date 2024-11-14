@@ -5,11 +5,13 @@ export class Puzzle1 extends Puzzle {
 
   startingPointLocation: Location;
   startingPointType: string = '';
+  startingTile: PipeTile;
 
   constructor(inputFile: string) {
     super(inputFile);
     this.startingPointLocation = this._findStartingLocation();
     this.startingPointType = this._getStartingPointType();
+    this.startingTile = this._getStartingTile();
   }
 
   protected _findStartingLocation(): Location {
@@ -42,5 +44,9 @@ export class Puzzle1 extends Puzzle {
     else if (connectedToSouth && connectedToWeast) this.startingPointType = '7';
     else if (connectedToSouth && connectedToEast) this.startingPointType = 'F';
     return this.startingPointType;
+  }
+
+  protected _getStartingTile(): PipeTile {
+    return new PipeTile(this.startingPointType, this.startingPointLocation);
   }
 };
