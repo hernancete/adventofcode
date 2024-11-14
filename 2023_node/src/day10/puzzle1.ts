@@ -1,11 +1,19 @@
 import { Puzzle } from "../shared/puzzle";
 import { PipeTile, Location, Directions } from "./pipeTile";
 
+function reverseDirection(dir: Directions): Directions {
+  if (dir === Directions.N) return Directions.S;
+  else if (dir === Directions.S) return Directions.N;
+  else if (dir === Directions.E) return Directions.W;
+  else return Directions.E; // dir === Directions.W
+}
+
 export class Puzzle1 extends Puzzle {
 
   startingPointLocation: Location;
   startingPointType: string = '';
   startingTile: PipeTile;
+  path: Location[] = [];
 
   constructor(inputFile: string) {
     super(inputFile);
@@ -52,8 +60,37 @@ export class Puzzle1 extends Puzzle {
 
   chooseStartingDirection(): Directions {
     if (this.startingTile.connectedTo.N) return Directions.N;
-    if (this.startingTile.connectedTo.S) return Directions.S;
     if (this.startingTile.connectedTo.E) return Directions.E;
+    if (this.startingTile.connectedTo.S) return Directions.S;
     else return Directions.W;
+  }
+
+  protected _getTypeOf(location: Location): string {
+    return this.input[location.lat].at(location.lon)!;
+  }
+
+  traceWalk(): Location[] {
+    let inTheEnd = false;
+    let tile: PipeTile = this.startingTile;
+    let commingFrom: Directions = tile.getWayOutDirection(this.chooseStartingDirection());
+    do {
+      this.path.push(tile.location);
+      const nextLocation = tile.walkTheTile(commingFrom);
+      const nextDirection = tile.getWayOutDirection(commingFrom);
+      // console.log(`I'm in ${JSON.stringify(tile.location)}, I'm a ${tile.tile}, I'm comming from ${commingFrom} so next location is ${JSON.stringify(nextLocation)} through ${nextDirection}`);
+      if (
+        nextLocation.lat === this.startingPointLocation.lat &&
+        nextLocation.lon === this.startingPointLocation.lon
+      ) {
+        inTheEnd = true;
+      }
+      else {
+        const nextType = this._getTypeOf(nextLocation);
+        tile = new PipeTile(nextType, nextLocation);
+        commingFrom = reverseDirection(nextDirection);
+      }
+    } while (!inTheEnd);
+
+    return this.path;
   }
 };

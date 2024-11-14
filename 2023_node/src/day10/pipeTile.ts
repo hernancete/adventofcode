@@ -54,7 +54,7 @@ export class PipeTile {
     }
   }
 
-  private getWayOutDirection(cammingFrom: Directions): Directions {
+  getWayOutDirection(cammingFrom: Directions): Directions {
     switch (this.tile) {
       case '|':
         if (cammingFrom === Directions.N) return Directions.S;
