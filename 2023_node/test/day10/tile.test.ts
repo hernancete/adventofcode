@@ -36,3 +36,27 @@ describe('Setting up a tile', () => {
     expect(tile3.type).toBe('other');
   });
 });
+
+describe('Finding position in land', () => {
+
+  test('Should know if located in the border of land', () => {
+    const tile0 = new Tile();
+    const tile1 = new Tile({ lat: 1, lon: 1 });
+    const tile2 = new Tile({ lat: 4, lon: 1 });
+    const tile3 = new Tile({ lat: 2, lon: 4 });
+
+    expect(tile0.amIInTheBorder(2, 2)).toBe(true);
+    expect(tile1.amIInTheBorder(5, 5)).toBe(false);
+    expect(tile2.amIInTheBorder(5, 5)).toBe(true);
+    expect(tile3.amIInTheBorder(5, 5)).toBe(true);
+
+    expect(tile2.amIInTheBorder(6, 6)).toBe(false);
+    expect(tile3.amIInTheBorder(6, 6)).toBe(false);
+
+    expect(tile2.amIInTheBorder(5, 10)).toBe(true);
+    expect(tile3.amIInTheBorder(5, 10)).toBe(false);
+
+    expect(tile2.amIInTheBorder(10, 5)).toBe(false);
+    expect(tile3.amIInTheBorder(10, 5)).toBe(true);
+  });
+});
