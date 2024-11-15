@@ -1,5 +1,6 @@
 import { Puzzle } from "../shared/puzzle";
-import { PipeTile, Location, Directions } from "./pipeTile";
+import { PipeTile } from "./pipeTile";
+import { Location, Directions } from "./utils";
 
 function reverseDirection(dir: Directions): Directions {
   if (dir === Directions.N) return Directions.S;

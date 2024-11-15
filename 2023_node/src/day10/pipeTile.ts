@@ -1,26 +1,15 @@
+import { Location, Directions } from "./utils";
 
 const tilesConnectingToNorth = ['|', 'J', 'L'];
 const tilesConnectingToSouth = ['|', '7', 'F'];
 const tilesConnectingToEast = ['-', 'L', 'F'];
 const tilesConnectingToWeast = ['-', 'J', '7'];
 
-export enum Directions {
-  N = 'N',
-  S = 'S',
-  E = 'E',
-  W = 'W',
-};
-
 interface Connections {
   N: boolean,
   S: boolean,
   E: boolean,
   W: boolean,
-};
-
-export interface Location {
-  lat: number, // row
-  lon: number, // col
 };
 
 export class PipeTile {

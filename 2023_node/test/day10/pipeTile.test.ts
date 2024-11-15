@@ -1,5 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
-import { PipeTile, Directions } from '../../src/day10/pipeTile';
+import { PipeTile } from '../../src/day10/pipeTile';
+import { Directions } from '../../src/day10/utils';
 
 const tiles = [
   { tile: '|', connectedTo: { N: true, S: true, E: false, W: false } },
