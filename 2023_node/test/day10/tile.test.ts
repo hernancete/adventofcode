@@ -20,4 +20,19 @@ describe('Setting up a tile', () => {
     expect(tile2.location).toEqual({ lat: 3, lon: 4 });
     expect(tile3.location).toEqual({ lat: 2, lon: 1 });
   });
+
+  test('Should optionally load an attribute type', () => {
+    const tile0 = new Tile();
+    const tile1 = new Tile();
+    const tile2 = new Tile();
+    const tile3 = new Tile();
+    tile1.setType('in');
+    tile2.setType('out');
+    tile3.setType('other');
+
+    expect(tile0.type).toBeUndefined();
+    expect(tile1.type).toBe('in');
+    expect(tile2.type).toBe('out');
+    expect(tile3.type).toBe('other');
+  });
 });
