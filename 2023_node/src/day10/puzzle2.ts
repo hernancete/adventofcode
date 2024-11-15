@@ -23,4 +23,15 @@ export class Puzzle2 extends Puzzle1 {
       }
     }
   }
+
+  setNonPipeTilesType() {
+    for (let lat = 0; lat < this.land.length; lat++) {
+      for (const tile of this.land[lat]) {
+        if (tile instanceof PipeTile) continue;
+        if (tile.amIInTheBorder(this.land.length, this.land[lat].length)) {
+          tile.setType('O');
+        }
+      }
+    }
+  }
 };
