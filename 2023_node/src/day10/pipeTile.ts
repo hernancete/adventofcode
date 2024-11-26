@@ -12,6 +12,35 @@ interface Connections {
   W: boolean,
 };
 
+const at = {
+  NW: { lat: -1, lon: -1 } as Location,
+  N: { lat: -1, lon: 0 } as Location,
+  NE: { lat: -1, lon: 1 } as Location,
+  W: { lat: 0, lon: -1 } as Location,
+  E: { lat: 0, lon: 1 } as Location,
+  SW: { lat: 1, lon: -1 } as Location,
+  S: { lat: 1, lon: 0 } as Location,
+  SE: { lat: 1, lon: 1 } as Location,
+}
+
+const tileSides = {
+  '|': { A: [at['NW'], at['W'], at['SW']], B: [at['NE'], at['E'], at['SE']] },
+  '-': { A: [at['NW'], at['N'], at['NE']], B: [at['SW'], at['S'], at['SE']] },
+  '7': { A: [at['NW'], at['N'], at['NE'], at['E'], at['SE']], B: [at['SW']] },
+  'F': { A: [at['NW'], at['N'], at['NE'], at['W'], at['NW']], B: [at['SE']] },
+  'J': { A: [at['NW']], B: [at['NE'], at['E'], at['SW'], at['S'], at['SE']] },
+  'L': { A: [at['NE']], B: [at['NW'], at['W'], at['SW'], at['S'], at['SE']] },
+};
+
+const whichSideAreYouNeighbour: any = {
+  '|': { S: { L: tileSides['|'].A, R: tileSides['|'].B }, N: { L: tileSides['|'].B, R: tileSides['|'].A } },
+  '-': { W: { L: tileSides['-'].A, R: tileSides['-'].B }, E: { L: tileSides['-'].B, R: tileSides['-'].A } },
+  '7': { W: { L: tileSides['7'].A, R: tileSides['7'].B }, S: { L: tileSides['7'].B, R: tileSides['7'].A } },
+  'F': { E: { L: tileSides['F'].B, R: tileSides['F'].A }, S: { L: tileSides['F'].A, R: tileSides['F'].B } },
+  'J': { W: { L: tileSides['J'].A, R: tileSides['J'].B }, N: { L: tileSides['J'].B, R: tileSides['J'].A } },
+  'L': { E: { L: tileSides['L'].B, R: tileSides['L'].A }, N: { L: tileSides['L'].A, R: tileSides['L'].B } },
+}
+
 export class PipeTile {
 
   tile: string;
@@ -75,5 +104,12 @@ export class PipeTile {
 
   walkTheTile(from: Directions): Location {
     return this.getNeighbourLocation(this.getWayOutDirection(from));
+  }
+
+  getSides(from: Directions) {
+    return {
+      L: whichSideAreYouNeighbour[this.tile][from].L.map((l: Location): Location => ({ lat: this.location.lat + l.lat, lon: this.location.lon + l.lon })),
+      R: whichSideAreYouNeighbour[this.tile][from].R.map((r: Location): Location => ({ lat: this.location.lat + r.lat, lon: this.location.lon + r.lon })),
+    };
   }
 };

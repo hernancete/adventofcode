@@ -62,4 +62,4 @@ node dist/day1/runPuzzle1.js
 | Day 25 |||
 
 
-[^1]: Using the puzzle2.approach2.ts script. The puzzle2.ts it's been running for more than 5 hours and it's in the 0.5% of the total walk.
+[^1]: Using the puzzle2.approach2.ts script. The puzzle2.ts it's been running for more than 5 hours and it's in the 0.5% of the total walk. (Update: after almost a week I reach 1981611000000, something near 15% of the path. I stopped running it.)

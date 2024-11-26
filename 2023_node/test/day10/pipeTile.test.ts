@@ -19,6 +19,15 @@ const walks = [
   { tile: 'L', location: { lat: 1, lon: 1 }, nextTileLocation: [{ from: 'N', lat: 1, lon: 2 }, { from: 'E', lat: 0, lon: 1 }] },
 ];
 
+const neighbours = [
+  { tile: '|', from: ['S', 'N'], L: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }], R: [{ lat: 2, lon: 2 }] },
+  { tile: '-', from: ['W', 'E'], L: [{ lat: 0, lon: 0 }], R: [{ lat: 2, lon: 1 }, { lat: 2, lon: 2 }] },
+  { tile: '7', from: ['S', 'W'], L: [], R: [{ lat: 0, lon: 0 }, { lat: 2, lon: 2 }] },
+  { tile: 'F', from: ['S', 'E'], L: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }], R: [{ lat: 2, lon: 2 }] },
+  { tile: 'J', from: ['W', 'N'], L: [{ lat: 0, lon: 0 }], R: [{ lat: 2, lon: 1 }, { lat: 2, lon: 2 }] },
+  { tile: 'L', from: ['E', 'N'], L: [{ lat: 0, lon: 0 }, { lat: 1, lon: 0 }, { lat: 2, lon: 1 }, { lat: 2, lon: 2 }], R: [] },
+];
+
 describe('Setting up a tile', () => {
 
   test('Should set the tile', () => {
@@ -62,6 +71,23 @@ describe('Going through the pipe tile', () => {
       t.nextTileLocation.forEach(nextTileLoc => {
         expect(tile.walkTheTile(nextTileLoc.from as Directions)).toEqual({ lat: nextTileLoc.lat, lon: nextTileLoc.lon });
       })
+    }
+  });
+
+  test('Should know which neighbours are on the right and left wen walking through the pipe tile', () => {
+    for (const n of neighbours) {
+      const tile = new PipeTile(n.tile, { lat: 1, lon: 1 });
+
+      const sideNeighbours = tile.getSides(n.from[0] as Directions);
+      expect(sideNeighbours).toEqual(expect.objectContaining({
+        L: expect.arrayContaining(n.L),
+        R: expect.arrayContaining(n.R),
+      }));
+      const sideNeighboursOtherwayAround = tile.getSides(n.from[1] as Directions);
+      expect(sideNeighboursOtherwayAround).toEqual(expect.objectContaining({
+        L: expect.arrayContaining(n.R),
+        R: expect.arrayContaining(n.L),
+      }));
     }
   });
 });
