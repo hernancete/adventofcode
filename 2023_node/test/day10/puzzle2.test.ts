@@ -20,6 +20,14 @@ const inputSampleBTileTypes = [
   ['P', 'P', 'P', 'P', 'P'],
   ['P', 'P', 'O', 'P', 'P'],
 ];
+const inputSampleBTilesFrom = [
+  ['-', '-', 'S', 'W', '-'],
+  ['-', 'S', 'W', 'N', '-'],
+  ['S', 'W', '-', 'N', 'W'],
+  ['S', 'E', 'E', 'E', 'N'],
+  ['E', 'N', '-', '-', '-'],
+];
+
 const inputSampleCTileTypes = [
   ['O', 'P', 'P', 'P', 'S', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
   ['O', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
@@ -46,6 +54,20 @@ describe('Building the whole land as individual tiles', () => {
         }
         else {
           expect(puzzle2.land[lat][lon]).not.toBeInstanceOf(PipeTile);
+        }
+      }
+    }
+  });
+
+  test('Should mark every pipe tile\'s from attribute', () => {
+    const puzzle2 = new Puzzle2(inputSampleB);
+    puzzle2.fillLandWithPipeTiles();
+
+    for (const lat in inputSampleBTilesFrom) {
+      for (const lon in inputSampleBTilesFrom[lat]) {
+        if (inputSampleBTilesFrom[lat][lon] !== '-') {
+          expect(puzzle2.land[lat][lon]).toBeInstanceOf(PipeTile);
+          expect(puzzle2.land[lat][lon].from).toBe(inputSampleBTilesFrom[lat][lon]);
         }
       }
     }

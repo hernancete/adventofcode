@@ -1,4 +1,4 @@
-import { Puzzle1 } from "./puzzle1";
+import { Puzzle1, reverseDirection } from "./puzzle1";
 import { PipeTile } from "./pipeTile";
 import { Tile } from "./tile";
 
@@ -6,11 +6,37 @@ export class Puzzle2 extends Puzzle1 {
 
   land: any[][] = [];
 
+  walk(): PipeTile[] {
+    const ret: PipeTile[] = [];
+    let inTheEnd = false;
+    let tile: PipeTile = this.startingTile;
+    tile.from = tile.getWayOutDirection(this.chooseStartingDirection());
+    do {
+      ret.push(tile);
+      const nextLocation = tile.walkTheTile(tile.from!);
+      const nextDirection = tile.getWayOutDirection(tile.from!);
+      if (
+        nextLocation.lat === this.startingPointLocation.lat &&
+        nextLocation.lon === this.startingPointLocation.lon
+      ) {
+        inTheEnd = true;
+      }
+      else {
+        const nextType = this._getTypeOf(nextLocation);
+        tile = new PipeTile(nextType, nextLocation);
+        tile.from = reverseDirection(nextDirection);
+      }
+    } while (!inTheEnd);
+
+    return ret;
+  }
+
   fillLandWithPipeTiles() {
-    this.traceWalk();
-    this.path.forEach(location => {
-      if (!Array.isArray(this.land[location.lat])) this.land[location.lat] = [];
-      this.land[location.lat][location.lon] = new PipeTile(this.input[location.lat][location.lon], { lat: location.lat, lon: location.lon });
+    const walk = this.walk();
+    walk.forEach(pipe => {
+      if (!Array.isArray(this.land[pipe.location.lat])) this.land[pipe.location.lat] = [];
+      // this.land[pipe.location.lat][pipe.location.lon] = new PipeTile(this.input[pipe.location.lat][pipe.location.lon], { lat: pipe.location.lat, lon: pipe.location.lon });
+      this.land[pipe.location.lat][pipe.location.lon] = pipe;
     });
   }
 

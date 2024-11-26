@@ -2,7 +2,7 @@ import { Puzzle } from "../shared/puzzle";
 import { PipeTile } from "./pipeTile";
 import { Location, Directions } from "./utils";
 
-function reverseDirection(dir: Directions): Directions {
+export function reverseDirection(dir: Directions): Directions {
   if (dir === Directions.N) return Directions.S;
   else if (dir === Directions.S) return Directions.N;
   else if (dir === Directions.E) return Directions.W;
