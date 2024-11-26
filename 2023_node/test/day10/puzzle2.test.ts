@@ -35,7 +35,6 @@ const inputSampleBTilesFrom = [
   ['S', 'E', 'E', 'E', 'N'],
   ['E', 'N', '-', '-', '-'],
 ];
-
 const inputSampleCTileTypes = [
   ['O', 'P', 'P', 'P', 'S', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
   ['O', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
@@ -48,6 +47,9 @@ const inputSampleCTileTypes = [
   ['O', 'O', 'O', 'O', 'O', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
   ['O', 'O', 'O', 'O', 'O', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'O', 'O'],
 ];
+const answerA = 1;
+const answerB = 1;
+const answerC = 10;
 
 describe('Building the whole land as individual tiles', () => {
 
@@ -231,3 +233,15 @@ describe('Building the whole land as individual tiles', () => {
   });
 });
 
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle2A = new Puzzle2(inputSampleA);
+    const puzzle2B = new Puzzle2(inputSampleB);
+    const puzzle2C = new Puzzle2(inputSampleC);
+
+    expect(puzzle2A.solve()).toBe(answerA);
+    expect(puzzle2B.solve()).toBe(answerB);
+    expect(puzzle2C.solve()).toBe(answerC);
+  });
+});

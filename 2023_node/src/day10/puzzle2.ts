@@ -22,6 +22,7 @@ const outsideBoundaries = (location: Location, boundaries: Boundaries): boolean 
 export class Puzzle2 extends Puzzle1 {
 
   land: any[][] = [];
+  pipePath: PipeTile[] = [];
   landHeight: number;
   landWidth: number;
   insideIsOn: 'L' | 'R' | undefined; // used to hold which side of the main loop is inside
@@ -58,8 +59,8 @@ export class Puzzle2 extends Puzzle1 {
   }
 
   fillLandWithPipeTiles() {
-    const walk = this.walk();
-    walk.forEach(pipe => {
+    this.pipePath = this.walk();
+    this.pipePath.forEach(pipe => {
       if (!Array.isArray(this.land[pipe.location.lat])) this.land[pipe.location.lat] = [];
       // this.land[pipe.location.lat][pipe.location.lon] = new PipeTile(this.input[pipe.location.lat][pipe.location.lon], { lat: pipe.location.lat, lon: pipe.location.lon });
       this.land[pipe.location.lat][pipe.location.lon] = pipe;
@@ -144,36 +145,58 @@ export class Puzzle2 extends Puzzle1 {
   }
 
   setNonPipeTilesType() {
-    for (let lat = 0; lat < this.land.length; lat++) {
-      for (const tile of this.land[lat]) {
-        // if it's a PipeTile, continue
-        if (tile instanceof PipeTile) continue;
-        // if it has already a type, continue
-        if (tile.type) continue;
-        // if it's in the border, set type out
-        if (tile.amIInTheBorder(this.land.length, this.land[lat].length)) {
-          tile.setType('O');
-          continue;
-        }
-        // if some neighbour has already a type, set the same type
-        const neighbours = this._getTileNeighbours(tile.location);
-        const tileNeighbourWithType: Tile | undefined = neighbours.find(n => n instanceof Tile && n.type) as Tile | undefined;
-        if (tileNeighbourWithType) {
-          tile.setType(tileNeighbourWithType.type);
-          continue;
-        }
-        // if some neighbour is a PipeTile I have to figure out whether I'm inside or outside of the main loop
-        const pipeTileNeighbour: PipeTile | undefined = neighbours.find(n => n instanceof PipeTile) as PipeTile | undefined;
-        if (pipeTileNeighbour) {
-          const sides: Sides = pipeTileNeighbour.getSides(pipeTileNeighbour.from!);
-          tile.setType(
-            sides[this.insideIsOn!].some((l: Location) => tile.location.lat === l.lat && tile.location.lon === l.lon)
-              ? 'I'
-              : 'O'
-          );
-          continue;
+    let tilesDone: number = 0;
+    const allTiles: number = this.landHeight * this.landWidth - this.pipePath.length;
+    do {
+      for (let lat = 0; lat < this.land.length; lat++) {
+        for (const tile of this.land[lat]) {
+          // if it's a PipeTile, continue
+          if (tile instanceof PipeTile) continue;
+          // if it has already a type, continue
+          if (tile.type) continue;
+          // if it's in the border, set type out
+          if (tile.amIInTheBorder(this.land.length, this.land[lat].length)) {
+            tile.setType('O');
+            tilesDone++;
+            continue;
+          }
+          // if some neighbour has already a type, set the same type
+          const neighbours = this._getTileNeighbours(tile.location);
+          const tileNeighbourWithType: Tile | undefined = neighbours.find(n => n instanceof Tile && n.type) as Tile | undefined;
+          if (tileNeighbourWithType) {
+            tile.setType(tileNeighbourWithType.type);
+            tilesDone++;
+            continue;
+          }
+          // if some neighbour is a PipeTile I have to figure out whether I'm inside or outside of the main loop
+          const pipeTileNeighbour: PipeTile | undefined = neighbours.find(n => n instanceof PipeTile) as PipeTile | undefined;
+          if (pipeTileNeighbour) {
+            const sides: Sides = pipeTileNeighbour.getSides(pipeTileNeighbour.from!);
+            tile.setType(
+              sides[this.insideIsOn!].some((l: Location) => tile.location.lat === l.lat && tile.location.lon === l.lon)
+                ? 'I'
+                : 'O'
+            );
+            tilesDone++;
+            continue;
+          }
         }
       }
+    } while (tilesDone < allTiles);
+  }
+
+  solve(): number {
+    this.fillLandWithPipeTiles();
+    this.fillLandWithTiles();
+    this.insideIsOn = this.whichSideIsInside();
+    this.setNonPipeTilesType();
+
+    let answer: number = 0;
+    for (let lat = 0; lat < this.land.length; lat++) {
+      for (const tile of this.land[lat]) {
+        if (tile instanceof Tile && tile.type === 'I') answer++;
+      }
     }
+    return answer;
   }
 };
