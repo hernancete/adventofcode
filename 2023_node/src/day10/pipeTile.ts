@@ -41,6 +41,11 @@ const whichSideAreYouNeighbour: any = {
   'L': { E: { L: tileSides['L'].B, R: tileSides['L'].A }, N: { L: tileSides['L'].A, R: tileSides['L'].B } },
 }
 
+export interface Sides {
+  L: Location[],
+  R: Location[],
+};
+
 export class PipeTile {
 
   tile: string;
@@ -107,7 +112,7 @@ export class PipeTile {
     return this.getNeighbourLocation(this.getWayOutDirection(from));
   }
 
-  getSides(from: Directions) {
+  getSides(from: Directions): Sides {
     return {
       L: whichSideAreYouNeighbour[this.tile][from].L.map((l: Location): Location => ({ lat: this.location.lat + l.lat, lon: this.location.lon + l.lon })),
       R: whichSideAreYouNeighbour[this.tile][from].R.map((r: Location): Location => ({ lat: this.location.lat + r.lat, lon: this.location.lon + r.lon })),

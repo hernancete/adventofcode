@@ -1,5 +1,5 @@
 import { Puzzle1, reverseDirection } from "./puzzle1";
-import { PipeTile } from "./pipeTile";
+import { PipeTile, Sides } from "./pipeTile";
 import { Tile } from "./tile";
 import { Location } from "./utils";
 
@@ -24,6 +24,7 @@ export class Puzzle2 extends Puzzle1 {
   land: any[][] = [];
   landHeight: number;
   landWidth: number;
+  insideIsOn: 'L' | 'R' | undefined; // used to hold which side of the main loop is inside
 
   constructor(inputFile: string) {
     super(inputFile);
@@ -75,10 +76,10 @@ export class Puzzle2 extends Puzzle1 {
     }
   }
 
-  whichSideIsInside(): string {
+  whichSideIsInside(): 'L' | 'R' {
     let figuredOut = false;
     let borderDepth = 0;
-    let side;
+    let side: any;
 
     borderloop: do {
       // checking the West and East borders
@@ -124,15 +125,53 @@ export class Puzzle2 extends Puzzle1 {
       borderDepth++;
 
     } while (!figuredOut);
-    return side as string;
+    return side;
+  }
+
+  private _getTileNeighbours(location: Location): (Tile | PipeTile)[] {
+    // This function should "never" be called from a border tile
+    // so We don't need to check if every (8) neighbour exist, they do exist.
+    return [
+      this.land[location.lat - 1][location.lon - 1],
+      this.land[location.lat - 1][location.lon],
+      this.land[location.lat - 1][location.lon + 1],
+      this.land[location.lat][location.lon - 1],
+      this.land[location.lat][location.lon + 1],
+      this.land[location.lat + 1][location.lon - 1],
+      this.land[location.lat + 1][location.lon],
+      this.land[location.lat + 1][location.lon + 1],
+    ];
   }
 
   setNonPipeTilesType() {
     for (let lat = 0; lat < this.land.length; lat++) {
       for (const tile of this.land[lat]) {
+        // if it's a PipeTile, continue
         if (tile instanceof PipeTile) continue;
+        // if it has already a type, continue
+        if (tile.type) continue;
+        // if it's in the border, set type out
         if (tile.amIInTheBorder(this.land.length, this.land[lat].length)) {
           tile.setType('O');
+          continue;
+        }
+        // if some neighbour has already a type, set the same type
+        const neighbours = this._getTileNeighbours(tile.location);
+        const tileNeighbourWithType: Tile | undefined = neighbours.find(n => n instanceof Tile && n.type) as Tile | undefined;
+        if (tileNeighbourWithType) {
+          tile.setType(tileNeighbourWithType.type);
+          continue;
+        }
+        // if some neighbour is a PipeTile I have to figure out whether I'm inside or outside of the main loop
+        const pipeTileNeighbour: PipeTile | undefined = neighbours.find(n => n instanceof PipeTile) as PipeTile | undefined;
+        if (pipeTileNeighbour) {
+          const sides: Sides = pipeTileNeighbour.getSides(pipeTileNeighbour.from!);
+          tile.setType(
+            sides[this.insideIsOn!].some((l: Location) => tile.location.lat === l.lat && tile.location.lon === l.lon)
+              ? 'I'
+              : 'O'
+          );
+          continue;
         }
       }
     }

@@ -14,12 +14,19 @@ const inputSampleBPipeTileLocations = [
   [true, true, true, true, true],
   [true, true, false, false, false],
 ];
+const inputSampleATileTypes = [
+  ['O', 'O', 'O', 'O', 'O'],
+  ['O', 'S', 'P', 'P', 'O'],
+  ['O', 'P', 'I', 'P', 'O'],
+  ['O', 'P', 'P', 'P', 'O'],
+  ['O', 'O', 'O', 'O', 'O'],
+];
 const inputSampleBTileTypes = [
   ['O', 'O', 'P', 'P', 'O'],
   ['O', 'P', 'P', 'P', 'O'],
   ['S', 'P', 'I', 'P', 'P'],
   ['P', 'P', 'P', 'P', 'P'],
-  ['P', 'P', 'O', 'P', 'P'],
+  ['P', 'P', 'O', 'O', 'O'],
 ];
 const inputSampleBTilesFrom = [
   ['-', '-', 'S', 'W', '-'],
@@ -124,11 +131,13 @@ describe('Building the whole land as individual tiles', () => {
     const puzzle2B = new Puzzle2(inputSampleB);
     puzzle2B.fillLandWithPipeTiles();
     puzzle2B.fillLandWithTiles();
+    puzzle2B.insideIsOn = puzzle2B.whichSideIsInside();
     puzzle2B.setNonPipeTilesType();
 
     const puzzle2C = new Puzzle2(inputSampleC);
     puzzle2C.fillLandWithPipeTiles();
     puzzle2C.fillLandWithTiles();
+    puzzle2C.insideIsOn = puzzle2C.whichSideIsInside();
     puzzle2C.setNonPipeTilesType();
 
     for (const l of inputSampleBBorders) {
@@ -167,5 +176,58 @@ describe('Building the whole land as individual tiles', () => {
     expect(puzzle2C.whichSideIsInside()).toBe('R');
   });
 
+  test('Should set type of every non-pipe tile as in or out', () => {
+    const puzzle2A = new Puzzle2(inputSampleA);
+    puzzle2A.fillLandWithPipeTiles();
+    puzzle2A.fillLandWithTiles();
+    puzzle2A.insideIsOn = puzzle2A.whichSideIsInside();
+    puzzle2A.setNonPipeTilesType();
+
+    const puzzle2B = new Puzzle2(inputSampleB);
+    puzzle2B.fillLandWithPipeTiles();
+    puzzle2B.fillLandWithTiles();
+    puzzle2B.insideIsOn = puzzle2B.whichSideIsInside();
+    puzzle2B.setNonPipeTilesType();
+
+    const puzzle2C = new Puzzle2(inputSampleC);
+    puzzle2C.fillLandWithPipeTiles();
+    puzzle2C.fillLandWithTiles();
+    puzzle2C.insideIsOn = puzzle2C.whichSideIsInside();
+    puzzle2C.setNonPipeTilesType();
+
+    for (const lat in inputSampleATileTypes) {
+      for (const lon in inputSampleATileTypes[lat]) {
+        if (['P', 'S'].includes(inputSampleATileTypes[lat][lon])) {
+          expect(puzzle2A.land[lat][lon]).toBeInstanceOf(PipeTile);
+        }
+        else {
+          expect(puzzle2A.land[lat][lon]).toBeInstanceOf(Tile);
+          expect(puzzle2A.land[lat][lon]).toHaveProperty('type', inputSampleATileTypes[lat][lon]);
+        }
+      }
+    }
+    for (const lat in inputSampleBTileTypes) {
+      for (const lon in inputSampleBTileTypes[lat]) {
+        if (['P', 'S'].includes(inputSampleBTileTypes[lat][lon])) {
+          expect(puzzle2B.land[lat][lon]).toBeInstanceOf(PipeTile);
+        }
+        else {
+          expect(puzzle2B.land[lat][lon]).toBeInstanceOf(Tile);
+          expect(puzzle2B.land[lat][lon]).toHaveProperty('type', inputSampleBTileTypes[lat][lon]);
+        }
+      }
+    }
+    for (const lat in inputSampleCTileTypes) {
+      for (const lon in inputSampleCTileTypes[lat]) {
+        if (['P', 'S'].includes(inputSampleCTileTypes[lat][lon])) {
+          expect(puzzle2C.land[lat][lon]).toBeInstanceOf(PipeTile);
+        }
+        else {
+          expect(puzzle2C.land[lat][lon]).toBeInstanceOf(Tile);
+          expect(puzzle2C.land[lat][lon]).toHaveProperty('type', inputSampleCTileTypes[lat][lon]);
+        }
+      }
+    }
+  });
 });
 
