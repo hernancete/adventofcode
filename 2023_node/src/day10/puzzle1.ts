@@ -73,12 +73,12 @@ export class Puzzle1 extends Puzzle {
   traceWalk(): Location[] {
     let inTheEnd = false;
     let tile: PipeTile = this.startingTile;
-    let commingFrom: Directions = tile.getWayOutDirection(this.chooseStartingDirection());
+    tile.from = tile.getWayOutDirection(this.chooseStartingDirection());
     do {
       this.path.push(tile.location);
-      const nextLocation = tile.walkTheTile(commingFrom);
-      const nextDirection = tile.getWayOutDirection(commingFrom);
-      // console.log(`I'm in ${JSON.stringify(tile.location)}, I'm a ${tile.tile}, I'm comming from ${commingFrom} so next location is ${JSON.stringify(nextLocation)} through ${nextDirection}`);
+      const nextLocation = tile.walkTheTile(tile.from!);
+      const nextDirection = tile.getWayOutDirection(tile.from!);
+      // console.log(`I'm in ${JSON.stringify(tile.location)}, I'm a ${tile.tile}, I'm comming from ${tile.from!} so next location is ${JSON.stringify(nextLocation)} through ${nextDirection}`);
       if (
         nextLocation.lat === this.startingPointLocation.lat &&
         nextLocation.lon === this.startingPointLocation.lon
@@ -88,7 +88,7 @@ export class Puzzle1 extends Puzzle {
       else {
         const nextType = this._getTypeOf(nextLocation);
         tile = new PipeTile(nextType, nextLocation);
-        commingFrom = reverseDirection(nextDirection);
+        tile.from = reverseDirection(nextDirection);
       }
     } while (!inTheEnd);
 

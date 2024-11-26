@@ -46,6 +46,7 @@ export class PipeTile {
   tile: string;
   connectedTo: Connections;
   location: Location;
+  from: Directions | undefined; // used when walking throw a pipe tile to set from which connection it start walking from
 
   constructor(tile: string, location: Location = { lat: 0, lon: 0 }) {
     this.tile = tile;
