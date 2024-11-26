@@ -4,6 +4,7 @@ import { Puzzle2 } from '../../src/day10/puzzle2';
 import { PipeTile } from '../../src/day10/pipeTile';
 import { Tile } from '../../src/day10/tile';
 
+const inputSampleA = getAbsPath(__dirname, './input.txt');
 const inputSampleB = getAbsPath(__dirname, './input2.txt');
 const inputSampleC = getAbsPath(__dirname, './input3.txt');
 const inputSampleBPipeTileLocations = [
@@ -147,5 +148,24 @@ describe('Building the whole land as individual tiles', () => {
       }
     }
   });
+
+  test('Should figure out if the in-side is whether to the right or left when walking through the main loop', () => {
+    const puzzle2A = new Puzzle2(inputSampleA);
+    puzzle2A.fillLandWithPipeTiles();
+    puzzle2A.fillLandWithTiles();
+
+    const puzzle2B = new Puzzle2(inputSampleB);
+    puzzle2B.fillLandWithPipeTiles();
+    puzzle2B.fillLandWithTiles();
+
+    const puzzle2C = new Puzzle2(inputSampleC);
+    puzzle2C.fillLandWithPipeTiles();
+    puzzle2C.fillLandWithTiles();
+
+    expect(puzzle2A.whichSideIsInside()).toBe('R');
+    expect(puzzle2B.whichSideIsInside()).toBe('R');
+    expect(puzzle2C.whichSideIsInside()).toBe('R');
+  });
+
 });
 
