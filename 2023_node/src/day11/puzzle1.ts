@@ -6,13 +6,19 @@ interface Galaxy {
   id: number,
   row: number,
   col: number,
-}
+};
+
+interface GalaxyPair {
+  galaxy1: Galaxy,
+  galaxy2: Galaxy,
+  distance?: number,
+};
 
 export class Puzzle1 extends Puzzle {
 
   universe: string[][] = [];
   galaxies: Galaxy[] = [];
-  galaxyPairs: Galaxy[][] = [];
+  galaxyPairs: GalaxyPair[] = [];
 
   shouldExpandVertically(): number[] {
     const indexesToExpand: number[] = this.input.reduce((prev, curr, index) => {
@@ -62,10 +68,10 @@ export class Puzzle1 extends Puzzle {
   findGalaxyPairs() {
     this.galaxies.forEach((galaxy, i, galaxies) => {
       for (let g = i + 1; g < this.galaxies.length; g++) {
-        this.galaxyPairs.push([
-          galaxy,
-          galaxies[g],
-        ]);
+        this.galaxyPairs.push({
+          galaxy1: galaxy,
+          galaxy2: galaxies[g],
+        });
       }
     });
   }
