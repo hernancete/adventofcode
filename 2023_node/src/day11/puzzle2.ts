@@ -43,8 +43,13 @@ export class Puzzle2 extends Puzzle1 {
       this.galaxyPairs[gp].distance =
         Math.abs(this.galaxyPairs[gp].galaxy1.row - this.galaxyPairs[gp].galaxy2.row) +
         Math.abs(this.galaxyPairs[gp].galaxy1.col - this.galaxyPairs[gp].galaxy2.col) +
-        expandVertically * this.expandedBy +
-        expandHorizontally * this.expandedBy;
+        (expandVertically * this.expandedBy - (this.expandedBy ? expandVertically : 0)) +
+        (expandHorizontally * this.expandedBy - (this.expandedBy ? expandHorizontally : 0));
     }
+  }
+
+  reset() {
+    this.galaxies = [];
+    this.galaxyPairs = [];
   }
 };
