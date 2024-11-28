@@ -83,4 +83,12 @@ export class Puzzle1 extends Puzzle {
         Math.abs(this.galaxyPairs[gp].galaxy1.col - this.galaxyPairs[gp].galaxy2.col);
     }
   }
+
+  solve(): number {
+    this.expand();
+    this.findGalaxies();
+    this.findGalaxyPairs();
+    this.findMinuminDistanceBetweenGalaxyPairs();
+    return this.galaxyPairs.reduce((prev, curr) => prev + curr.distance!, 0);
+  }
 };

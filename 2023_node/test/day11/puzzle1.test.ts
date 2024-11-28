@@ -11,7 +11,7 @@ const sampleAExpandedUniverseRow0 = '....#........';
 const sampleAExpandedUniverseRow1 = '.........#...';
 const sampleAExpandedUniverseRow6 = '.#...........';
 const sampleAExpandedUniverseRow11 = '#....#.......';
-
+const answer = 374;
 // expanded sample A universe
 // ....1........
 // .........2...
@@ -109,5 +109,14 @@ describe('Working with galaxies', () => {
     expect(puzzle1.galaxyPairs[5]).toHaveProperty('distance', 15); // 1-7
     expect(puzzle1.galaxyPairs[18]).toHaveProperty('distance', 17); // 3-6
     expect(puzzle1.galaxyPairs[35]).toHaveProperty('distance', 5); // 8-9
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle1 = new Puzzle1(sampleA);
+
+    expect(puzzle1.solve()).toBe(answer);
   });
 });
