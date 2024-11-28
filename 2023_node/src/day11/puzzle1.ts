@@ -1,8 +1,17 @@
 import { Puzzle } from "../shared/puzzle";
 
+const GALAXY = '#';
+
+interface Galaxy {
+  id: number,
+  row: number,
+  col: number,
+}
+
 export class Puzzle1 extends Puzzle {
 
   universe: string[][] = [];
+  galaxies: Galaxy[] = [];
 
   shouldExpandVertically(): number[] {
     const indexesToExpand: number[] = this.input.reduce((prev, curr, index) => {
@@ -33,5 +42,19 @@ export class Puzzle1 extends Puzzle {
         this.universe[row].splice(index, 0, this.universe[row][index]);
       }
     });
+  }
+
+  findGalaxies() {
+    for (let row = 0; row < this.universe.length; row++) {
+      for (let col = 0; col < this.universe[row].length; col++) {
+        if (this.universe[row][col] === GALAXY) {
+          this.galaxies.push({
+            id: this.galaxies.length,
+            row,
+            col,
+          });
+        }
+      }
+    }
   }
 };
