@@ -75,4 +75,12 @@ export class Puzzle1 extends Puzzle {
       }
     });
   }
+
+  findMinuminDistanceBetweenGalaxyPairs() {
+    for (let gp = 0; gp < this.galaxyPairs.length; gp++) {
+      this.galaxyPairs[gp].distance =
+        Math.abs(this.galaxyPairs[gp].galaxy1.row - this.galaxyPairs[gp].galaxy2.row) +
+        Math.abs(this.galaxyPairs[gp].galaxy1.col - this.galaxyPairs[gp].galaxy2.col);
+    }
+  }
 };
