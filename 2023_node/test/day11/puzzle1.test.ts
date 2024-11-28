@@ -84,4 +84,14 @@ describe('Working with galaxies', () => {
     expect(puzzle1.galaxies[5]).toEqual(expect.objectContaining({ row: 7, col: 12 }));
     expect(puzzle1.galaxies[8]).toEqual(expect.objectContaining({ row: 11, col: 5 }));
   });
+
+  test('Should find all galaxy pairs', () => {
+    const puzzle1 = new Puzzle1(sampleA);
+    puzzle1.expand();
+    puzzle1.findGalaxies();
+    puzzle1.findGalaxyPairs();
+
+    expect(puzzle1.galaxyPairs).toBeInstanceOf(Array);
+    expect(puzzle1.galaxyPairs).toHaveLength(36);
+  });
 });

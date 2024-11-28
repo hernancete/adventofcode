@@ -12,6 +12,7 @@ export class Puzzle1 extends Puzzle {
 
   universe: string[][] = [];
   galaxies: Galaxy[] = [];
+  galaxyPairs: Galaxy[][] = [];
 
   shouldExpandVertically(): number[] {
     const indexesToExpand: number[] = this.input.reduce((prev, curr, index) => {
@@ -56,5 +57,16 @@ export class Puzzle1 extends Puzzle {
         }
       }
     }
+  }
+
+  findGalaxyPairs() {
+    this.galaxies.forEach((galaxy, i, galaxies) => {
+      for (let g = i + 1; g < this.galaxies.length; g++) {
+        this.galaxyPairs.push([
+          galaxy,
+          galaxies[g],
+        ]);
+      }
+    });
   }
 };
