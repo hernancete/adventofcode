@@ -24,6 +24,10 @@ const someLocationOptions = [
   { springs: '????.######..#####.', groupLength: 4, locations: [[0, 4]] },
   { springs: '????.######..#####.', groupLength: 5, locations: [[13, 18]] },
   { springs: '????.######..#####.', groupLength: 6, locations: [[5, 11]] },
+  { springs: '?###????????', groupLength: 1, locations: [[5, 6], [6, 7], [7, 8], [8, 9], [9, 10], [10, 11], [11, 12]] },
+  { springs: '?###????????', groupLength: 2, locations: [[5, 7], [6, 8], [7, 9], [8, 10], [9, 11], [10, 12]] },
+  { springs: '?###????????', groupLength: 3, locations: [[1, 4], [5, 8], [6, 9], [7, 10], [8, 11], [9, 12]] },
+  { springs: '?###????????', groupLength: 4, locations: [[0, 4], [1, 5], [5, 9], [6, 10], [7, 11], [8, 12]] },
 ];
 
 describe('Parsing the input', () => {
