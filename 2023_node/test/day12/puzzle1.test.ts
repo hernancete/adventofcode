@@ -45,8 +45,11 @@ describe('Parsing the input', () => {
       }));
     }
   });
+});
 
-  test('Should get all group location options', () => {
+describe('Working with spring groups', () => {
+
+  test('Should get all group location options for a given spring record', () => {
     for (const slo of someLocationOptions) {
       const options = getLocationAlternatives(slo.springs, slo.groupLength);
       expect(options).toEqual(slo.locations);
