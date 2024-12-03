@@ -120,6 +120,9 @@ const sampleCLocationAlternatives = [
     [[1, 5], [8, 10], [11, 12]],
   ],
 ];
+const answerA = 6;
+const answerB = 21;
+const answerC = 37;
 
 describe('Parsing the input', () => {
 
@@ -169,5 +172,18 @@ describe('Working with spring groups', () => {
     for (let l = 0; l < sampleCLocationAlternatives.length; l++) {
       expect(puzzle1C.records[l].locationOptions).toEqual(expect.arrayContaining(sampleCLocationAlternatives[l]));
     }
+  });
+});
+
+describe('Solving the puzzle', () => {
+
+  test('Should solve the puzzle', () => {
+    const puzzle1A = new Puzzle1(sampleAInputFile);
+    const puzzle1B = new Puzzle1(sampleBInputFile);
+    const puzzle1C = new Puzzle1(sampleCInputFile);
+
+    expect(puzzle1A.solve()).toBe(answerA);
+    expect(puzzle1B.solve()).toBe(answerB);
+    expect(puzzle1C.solve()).toBe(answerC);
   });
 });

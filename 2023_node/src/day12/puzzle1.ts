@@ -70,4 +70,10 @@ export class Puzzle1 extends Puzzle {
       this.records[recordIndex].locationOptions = combinedLocationOptions;
     });
   }
+
+  solve(): number {
+    this.parseRecords();
+    this.calculateDamagedGroupLocationOptions();
+    return this.records.reduce((prev, curr) => prev + curr.locationOptions.length, 0);
+  }
 }
