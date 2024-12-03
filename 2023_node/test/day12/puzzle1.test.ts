@@ -3,6 +3,8 @@ import { getAbsPath } from '../utils';
 import { Puzzle1, getLocationAlternatives } from '../../src/day12/puzzle1';
 
 const sampleAInputFile = getAbsPath(__dirname, 'input.txt');
+const sampleBInputFile = getAbsPath(__dirname, 'input2.txt');
+const sampleCInputFile = getAbsPath(__dirname, 'input3.txt');
 const sampleARecords = [
   { springs: '#.#.###', groups: [1, 1, 3] },
   { springs: '.#...#....###.', groups: [1, 1, 3] },
@@ -29,6 +31,95 @@ const someLocationOptions = [
   { springs: '?###????????', groupLength: 3, locations: [[1, 4], [5, 8], [6, 9], [7, 10], [8, 11], [9, 12]] },
   { springs: '?###????????', groupLength: 4, locations: [[0, 4], [1, 5], [5, 9], [6, 10], [7, 11], [8, 12]] },
 ];
+const sampleALocationAlternatives = [
+  [
+    // #.#.### 1,1,3
+    [[0, 1], [2, 3], [4, 7]],
+  ],
+  [
+    // .#...#....###. 1,1,3
+    [[1, 2], [5, 6], [10, 13]],
+  ],
+  [
+    // .#.###.#.###### 1,3,1,6
+    [[1, 2], [3, 6], [7, 8], [9, 15]],
+  ],
+  [
+    // ####.#...#... 4,1,1
+    [[0, 4], [5, 6], [9, 10]],
+  ],
+  [
+    // #....######..#####. 1,6,5
+    [[0, 1], [5, 11], [13, 18]],
+  ],
+  [
+    // .###.##....# 3,2,1
+    [[1, 4], [5, 7], [11, 12]],
+  ],
+];
+const sampleBLocationAlternatives = [
+  [
+    // ???.### 1,1,3
+    [[0, 1], [2, 3], [4, 7]],
+  ],
+  [
+    // .??..??...?##. 1,1,3
+    [[1, 2], [5, 6], [10, 13]],
+    [[1, 2], [6, 7], [10, 13]],
+    [[2, 3], [5, 6], [10, 13]],
+    [[2, 3], [6, 7], [10, 13]],
+  ],
+  [
+    // ?#?#?#?#?#?#?#? 1,3,1,6
+    [[1, 2], [3, 6], [7, 8], [9, 15]],
+  ],
+  [
+    // ????.#...#... 4,1,1
+    [[0, 4], [5, 6], [9, 10]],
+  ],
+  [
+    // ????.######..#####. 1,6,5
+    [[0, 1], [5, 11], [13, 18]],
+    [[1, 2], [5, 11], [13, 18]],
+    [[2, 3], [5, 11], [13, 18]],
+    [[3, 4], [5, 11], [13, 18]],
+  ],
+  [
+    // ?###???????? 3,2,1
+    [[1, 4], [5, 7], [8, 9]],
+    [[1, 4], [5, 7], [9, 10]],
+    [[1, 4], [5, 7], [10, 11]],
+    [[1, 4], [5, 7], [11, 12]],
+    [[1, 4], [6, 8], [9, 10]],
+    [[1, 4], [6, 8], [10, 11]],
+    [[1, 4], [6, 8], [11, 12]],
+    [[1, 4], [7, 9], [10, 11]],
+    [[1, 4], [7, 9], [11, 12]],
+    [[1, 4], [8, 10], [11, 12]],
+  ],
+];
+const sampleCLocationAlternatives = [
+  ...sampleBLocationAlternatives,
+  [
+    // ?###???????? 4,2,1
+    [[0, 4], [5, 7], [8, 9]],
+    [[0, 4], [5, 7], [9, 10]],
+    [[0, 4], [5, 7], [10, 11]],
+    [[0, 4], [5, 7], [11, 12]],
+    [[0, 4], [6, 8], [9, 10]],
+    [[0, 4], [6, 8], [10, 11]],
+    [[0, 4], [6, 8], [11, 12]],
+    [[0, 4], [7, 9], [10, 11]],
+    [[0, 4], [7, 9], [11, 12]],
+    [[0, 4], [8, 10], [11, 12]],
+    [[1, 5], [6, 8], [9, 10]],
+    [[1, 5], [6, 8], [10, 11]],
+    [[1, 5], [6, 8], [11, 12]],
+    [[1, 5], [7, 9], [10, 11]],
+    [[1, 5], [7, 9], [11, 12]],
+    [[1, 5], [8, 10], [11, 12]],
+  ],
+];
 
 describe('Parsing the input', () => {
 
@@ -53,6 +144,30 @@ describe('Working with spring groups', () => {
     for (const slo of someLocationOptions) {
       const options = getLocationAlternatives(slo.springs, slo.groupLength);
       expect(options).toEqual(slo.locations);
+    }
+  });
+
+  test('Should get all possible group location options combinations for a given srping record and damaged groups', () => {
+    const puzzle1A = new Puzzle1(sampleAInputFile);
+    puzzle1A.parseRecords();
+    puzzle1A.calculateDamagedGroupLocationOptions();
+
+    const puzzle1B = new Puzzle1(sampleBInputFile);
+    puzzle1B.parseRecords();
+    puzzle1B.calculateDamagedGroupLocationOptions();
+
+    const puzzle1C = new Puzzle1(sampleCInputFile);
+    puzzle1C.parseRecords();
+    puzzle1C.calculateDamagedGroupLocationOptions();
+
+    for (let l = 0; l < sampleALocationAlternatives.length; l++) {
+      expect(puzzle1A.records[l].locationOptions).toEqual(expect.arrayContaining(sampleALocationAlternatives[l]));
+    }
+    for (let l = 0; l < sampleBLocationAlternatives.length; l++) {
+      expect(puzzle1B.records[l].locationOptions).toEqual(expect.arrayContaining(sampleBLocationAlternatives[l]));
+    }
+    for (let l = 0; l < sampleCLocationAlternatives.length; l++) {
+      expect(puzzle1C.records[l].locationOptions).toEqual(expect.arrayContaining(sampleCLocationAlternatives[l]));
     }
   });
 });
