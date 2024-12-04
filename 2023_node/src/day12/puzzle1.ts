@@ -3,10 +3,10 @@ import { Puzzle } from "../shared/puzzle";
 const DAMAGED = '#';
 const UNKNOWN = '?';
 
-export const getLocationAlternatives = (records: string, groupLength: number): number[][] => {
+export const getLocationAlternatives = (records: string, groupLength: number, skipFirst: number = 0, skipLast: number = 0): number[][] => {
   const locations: number[][] = [];
   const regex = new RegExp(`^[${DAMAGED}\\${UNKNOWN}]{${groupLength}}$`);
-  for (let i = 0; i <= records.length - groupLength; i++) {
+  for (let i = skipFirst; i <= records.length - skipLast - groupLength; i++) {
     if (i > 0 && records.at(i - 1) === DAMAGED) continue;
     if (i < records.length - groupLength && records.at(i + groupLength) === DAMAGED) continue;
     if (regex.test(records.slice(i, i + groupLength))) {
@@ -39,7 +39,8 @@ export class Puzzle1 extends Puzzle {
 
   calculateDamagedGroupLocationOptions() {
     this.records.forEach((record, recordIndex) => {
-      // const record = this.records[0];
+      // const recordIndex = 5;
+      // const record = this.records[5];
       const ret: any[] = [];
       // for every group, get the location options
       // with that, build "all the alternatives" (combinations) and then filter only the valid ones:
@@ -47,11 +48,15 @@ export class Puzzle1 extends Puzzle {
       // - no damaged spring can left outside groups (maybe not needed)
 
       // for every group, get the location options
-      const groupsLocationOptions: number[][][] = record.groups.map((groupLen: number) => getLocationAlternatives(record.springs, groupLen));
+      const groupsLocationOptions: number[][][] = record.groups.map((groupLen: number, i: number) => {
+        const skipFirst: number = record.groups.slice(0, i).reduce((prev: number, curr: number) => prev + curr, 0);
+        const skipLast: number = record.groups.slice(i + 1).reduce((prev: number, curr: number) => prev + curr, 0);
+        return getLocationAlternatives(record.springs, groupLen, skipFirst, skipLast);
+      });
 
       // build the alternatives
       let combinedLocationOptions: number[][][] = cartesianProduct(groupsLocationOptions);
-      // console.log('all combinations', combinedLocationOptions);
+      // console.log('all combinations', combinedLocationOptions.length);
 
       // filter the ones that not overlap with each other
       combinedLocationOptions = combinedLocationOptions.filter(groupLocationOption => {
@@ -65,7 +70,7 @@ export class Puzzle1 extends Puzzle {
           return false;
         }
       });
-      // console.log('non overlaping', combinedLocationOptions);
+      // console.log('non overlaping', combinedLocationOptions.length);
 
       this.records[recordIndex].locationOptions = combinedLocationOptions;
     });
