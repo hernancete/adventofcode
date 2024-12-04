@@ -10,3 +10,4 @@ cp src/day08/input.txt dist/day08/
 cp src/day09/input.txt dist/day09/
 cp src/day10/input.txt dist/day10/
 cp src/day11/input.txt dist/day11/
+cp src/day12/input.txt dist/day12/
