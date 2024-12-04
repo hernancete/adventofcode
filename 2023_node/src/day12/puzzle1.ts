@@ -23,6 +23,10 @@ const cartesianProduct = <T>(arrays: T[][]): T[][] => {
     [[]]);
 }
 
+const stringSplice = (input: string, from: number, to: number): string => {
+  return input.slice(0, from) + input.slice(to);
+}
+
 export class Puzzle1 extends Puzzle {
 
   records: any[] = [];
@@ -38,10 +42,9 @@ export class Puzzle1 extends Puzzle {
   }
 
   calculateDamagedGroupLocationOptions() {
+    const damagedRegex = new RegExp(`${DAMAGED}`);
+
     this.records.forEach((record, recordIndex) => {
-      // const recordIndex = 5;
-      // const record = this.records[5];
-      const ret: any[] = [];
       // for every group, get the location options
       // with that, build "all the alternatives" (combinations) and then filter only the valid ones:
       // - every group should be at least a spring apart
@@ -71,6 +74,14 @@ export class Puzzle1 extends Puzzle {
         }
       });
       // console.log('non overlaping', combinedLocationOptions.length);
+
+      // filter the ones having some damaged spring outside groups
+      combinedLocationOptions = combinedLocationOptions.filter(groupLocationOption => {
+        const healthySprings = [...groupLocationOption].reverse().reduce((record, group) => {
+          return stringSplice(record, group[0], group[1]);
+        }, this.records[recordIndex].springs);
+        return !(damagedRegex.test(healthySprings));
+      });
 
       this.records[recordIndex].locationOptions = combinedLocationOptions;
     });
