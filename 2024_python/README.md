@@ -29,14 +29,14 @@ make coverage
 For example, run first day's puzzle 1.
 
 ```bash
-python3 -B src/day1/run_puzzle1.py
+PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 ```
 
 ## Puzzle's results
 
 | Day   | Puzzle 1 | Puzzle 2 |
 | :---  | :---:    | :---:    |
-| Day 1 | 2057374 | |
+| Day 1 | 2057374 | 23177084 |
 | Day 2 | | |
 | Day 3 | | |
 | Day 4 | | |
