@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 coverage
 .coverage
+htmlcov
 node_modules
 package-lock.json
 dist/

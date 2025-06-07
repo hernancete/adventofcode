@@ -14,7 +14,7 @@
 import os
 from unittest import mock
 import unittest
-from day1.puzzle2 import Puzzle2
+from src.day1.puzzle2 import Puzzle2
 
 INPUT_LINE_KEY = 0
 FIRST_DIGIT_KEY = 1

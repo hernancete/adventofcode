@@ -1,6 +1,4 @@
-MAKEFLAGS += --no-print-directory
-
-ARGS ?= ''
+ARGS?=
 
 venv:
 	pipenv shell

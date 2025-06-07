@@ -18,7 +18,7 @@ make coverage
 
 For example, run first day's puzzle 1.
 ```bash
-python3 -B day1/run_puzzle1.py
+python3 -B src/day1/run_puzzle1.py
 ```
 
 ### Puzzle's results
