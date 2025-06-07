@@ -24,14 +24,13 @@ make test
 make test TEST_ARGS=tests/day1/puzzle1.py
 make coverage
 ```
-
-#### Run some day's puzzle
+<!-- #### Run some day's puzzle
 
 For example, run first day's puzzle 1.
 
 ```bash
 python3 -B src/day1/run_puzzle1.py
-```
+``` -->
 
 ## Puzzle's results
 
