@@ -1,12 +1,12 @@
 export PYTHONPATH := .
 
-TEST_ARGS ?=
+TEST_ARGS ?= -v
 
 venv:
 	pipenv shell
 
 test:
-	pipenv run pytest -v $(TEST_ARGS)
+	pipenv run pytest $(TEST_ARGS)
 
 coverage:
 	pipenv run coverage run -m pytest
