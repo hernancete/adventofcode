@@ -6,3 +6,6 @@ class Puzzle:
     def read_input_lines(self):
         with open(self.input_file, 'r') as file:
             self.lines = [line.strip() for line in file]
+
+    def solve(self):
+        raise NotImplementedError

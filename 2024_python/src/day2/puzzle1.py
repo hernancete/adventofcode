@@ -1,4 +1,4 @@
-from src.common.utils import Puzzle
+from src.utils.puzzle import Puzzle
 
 MIN_GAP = 1
 MAX_GAP = 3
