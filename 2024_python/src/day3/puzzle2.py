@@ -6,8 +6,10 @@ class Puzzle2(Puzzle1):
 
     def sanitize_input(self):
         for i in range(len(self.lines)):
-            self.lines[i] = re.sub(r'don\'t\(\).*do\(\)', '', self.lines[i])
+            self.lines[i] = re.sub(r"don\'t\(\).*?do\(\)", '', self.lines[i])
+            self.lines[i] = re.sub(r"don\'t\(\).*", '', self.lines[i])
 
     def read_input_lines(self):
         super().read_input_lines()
+        self.lines = [''.join(self.lines)]
         self.sanitize_input()

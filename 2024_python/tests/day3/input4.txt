@@ -1,0 +1,1 @@
+xmul(2,4)%&mul[3,7]!@^don't()do_not_mul(5,5)+mul(32,64]then(mul(11,8)do()mul(8,5))xnot_mul(2,5)+mul(32,64]then(mul(100,1)mul(3,3))xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))

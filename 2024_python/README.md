@@ -1,3 +1,7 @@
+<style>
+  star::after { content: '*'; color: yellow; }
+</style>
+
 # 2024_python
 
 ## Just for the records
@@ -36,9 +40,9 @@ PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 
 | Day   | Puzzle 1 | Puzzle 2 |
 | :---  | :---:    | :---:    |
-| Day 1 | 2057374 | 23177084 |
-| Day 2 | 242 | 311 |
-| Day 3 | 174336360 | 79842763 *(Not the right answer.. mine is too low.)* |
+| Day 1 | 2057374 <star /> | 23177084 <star /> |
+| Day 2 | 242 <star /> | 311 <star /> |
+| Day 3 | 174336360 <star /> | ~~79842763~~ *(Too low)*<br />~~129087088~~ *(Too high)*<br />~~98826679~~ *(Too high)*<br />88802350 <star /> |
 | Day 4 | | |
 | Day 5 | | |
 | Day 6 | | |
@@ -62,3 +66,7 @@ PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 | Day 24 | | |
 | Day 25 | | |
 
+### Notes
+
+#### Day 3 Puzzle 2
+I don't remember why I failed the first attempt. The second one I wasn't "deleting" the `mul` operations after the `don't()` until the end of line (Though it wasn't necessary, because what I was gonna find out in the last attempt). The third I was taking the input as 6 separate programs, one by line.
