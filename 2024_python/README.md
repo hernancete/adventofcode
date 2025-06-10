@@ -38,7 +38,7 @@ PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 | :---  | :---:    | :---:    |
 | Day 1 | 2057374 | 23177084 |
 | Day 2 | 242 | 311 |
-| Day 3 | 174336360 | |
+| Day 3 | 174336360 | 79842763 *(Not the right answer.. mine is too low.)* |
 | Day 4 | | |
 | Day 5 | | |
 | Day 6 | | |
