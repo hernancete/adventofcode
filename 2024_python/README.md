@@ -9,8 +9,15 @@
 #### Project setup
 
 ```bash
-pipenv --python 3.11
+sudo apt-get install python3-pip
+sudo apt-get install pipenv
+
+# start the venv
+pipenv --python /usr/bin/python  # or /usr/bin/python3
 pipenv install --dev pytest coverage
+
+# once started (pipfile created) if running in new pc
+pipenv install --dev
 ```
 
 ## Some commands:
