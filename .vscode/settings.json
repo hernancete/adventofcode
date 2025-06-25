@@ -1,16 +1,6 @@
 {
-  "eslint.options": {
-    "configFile": ".eslintrc"
-  },
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
-  /*"editor.defaultFormatter": "esbenp.prettier-vscode"*/
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": true,
-  "[python]": {},
-  "flake8.args": [
-    "--max-line-length",
-    "150",
-    // "--ignore=E501"
-  ],
 }
