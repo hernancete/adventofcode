@@ -53,7 +53,7 @@ PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 | Day 4 | 2454 <star /> | 1858 <star /> |
 | Day 5 | 4790 <star /> | 6319 <star /> |
 | Day 6 | 4696 <star /> | 1443 <star /> |
-| Day 7 | | |
+| Day 7 | 2941973819040 | |
 | Day 8 | | |
 | Day 9 | | |
 | Day 10 | | |
