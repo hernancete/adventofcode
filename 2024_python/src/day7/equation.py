@@ -9,9 +9,14 @@ def op_sum(a, b):
     return a + b
 
 
+def op_concat(a, b):
+    return int(str(a) + str(b))
+
+
 do_the_math = {
     '+': op_sum,
     '*': op_mul,
+    '||': op_concat,
 }
 
 
@@ -48,11 +53,10 @@ class Equation:
     def combine_operators(operators: list, n: int):
         return list(product(operators, repeat=n))
 
-    def solve(self):
+    def solve(self, operators: tuple=('+', '*')):
         if len(self.operands) == 1:
             return self.operands[0]
 
-        operators = ['+', '*']
         comb = Equation.combine_operators(operators, len(self.operands) - 1)
 
         for c in comb:
