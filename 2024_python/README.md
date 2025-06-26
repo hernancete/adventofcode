@@ -1,7 +1,3 @@
-<style>
-  star::after { content: '*'; color: yellow; }
-</style>
-
 # 2024_python
 
 ## Just for the records
@@ -47,13 +43,13 @@ PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 
 | Day   | Puzzle 1 | Puzzle 2 |
 | :---  | :---:    | :---:    |
-| Day 1 | 2057374 <star /> | 23177084 <star /> |
-| Day 2 | 242 <star /> | 311 <star /> |
-| Day 3 | 174336360 <star /> | ~~79842763~~ *(Too low)*<br />~~129087088~~ *(Too high)*<br />~~98826679~~ *(Too high)*<br />88802350 <star /> |
-| Day 4 | 2454 <star /> | 1858 <star /> |
-| Day 5 | 4790 <star /> | 6319 <star /> |
-| Day 6 | 4696 <star /> | 1443 <star /> |
-| Day 7 | 2941973819040 <star /> | 249943041417600 <star /> |
+| Day 1 | 2057374 ⭐ | 23177084 ⭐ |
+| Day 2 | 242 ⭐ | 311 ⭐ |
+| Day 3 | 174336360 ⭐ | ~~79842763~~ *(Too low)*<br />~~129087088~~ *(Too high)*<br />~~98826679~~ *(Too high)*<br />88802350 ⭐ |
+| Day 4 | 2454 ⭐ | 1858 ⭐ |
+| Day 5 | 4790 ⭐ | 6319 ⭐ |
+| Day 6 | 4696 ⭐ | 1443 ⭐ |
+| Day 7 | 2941973819040 ⭐ | 249943041417600 ⭐ |
 | Day 8 | | |
 | Day 9 | | |
 | Day 10 | | |
