@@ -50,7 +50,7 @@ PYTHONPATH=. python3 -B src/day1/run_puzzle1.py
 | Day 5 | 4790 ⭐ | 6319 ⭐ |
 | Day 6 | 4696 ⭐ | 1443 ⭐ |
 | Day 7 | 2941973819040 ⭐ | 249943041417600 ⭐ |
-| Day 8 | | |
+| Day 8 | 259 ⭐ | |
 | Day 9 | | |
 | Day 10 | | |
 | Day 11 | | |
